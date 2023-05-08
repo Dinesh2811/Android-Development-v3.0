@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="28"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="33" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
+
+    <application
+        android:name=".app.MyApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Material3"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="33">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Material3">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+<!--        app     -->
+        <activity android:name=".app.Root"/>
+        <activity android:name=".app.ThemePreference"/>
+        <activity android:name=".app.ToolbarMain"/>
+        <activity android:name=".app.BaseActivity"/>
+        <activity android:name=".app.RequestPermission"/>
+
+<!--        app.user_interface     -->
+        <activity android:name=".app.user_interface.CollapsingToolbar"/>
+
+<!--        app.user_interface.notification     -->
+        <activity android:name=".app.user_interface.notification.MainActivity"/>
+        <receiver android:name=".app.user_interface.notification.Button1Receiver"/>
+        <receiver android:name=".app.user_interface.notification.Button2Receiver"/>
+
+<!--        root     -->
+        <activity android:name=".root.RvMain"/>
+
+<!--        kotlin.Activity     -->
+        <activity android:name=".kotlin.activity.PhotoPicker"/>
+        <activity android:name=".kotlin.activity.LayoutInflaterClass"/>
+
+<!--        kotlin.Retrofit     -->
+        <activity android:name=".kotlin.retrofit.raw.ReadJSON"/>
+        <activity android:name=".kotlin.retrofit.v0.ApiMain"/>
+        <activity android:name=".kotlin.retrofit.v1.ApiMain"/>
+        <activity android:name=".kotlin.retrofit.v2.ApiMain"/>
+        <activity android:name=".kotlin.retrofit.livedata.ApiMain"/>
+        <activity android:name=".kotlin.retrofit.v3.ApiMain"/>
+
+<!--        java     -->
+        <activity android:name=".java.dialog.Rv_as_Dialog"/>
+
+<!--        rv.java     -->
+        <activity android:name=".rv.java.basic.RvMain"/>
+        <activity android:name=".rv.java.search.RvMain"/>
+        <activity android:name=".rv.java.refresh.RvMain"/>
+        <activity android:name=".rv.java.reorder.RvMain"/>
+        <activity android:name=".rv.java.multi_select.RvMain"/>
+        <activity android:name=".rv.java.expand.RvMain"/>
+
+<!--        rv.kotlin     -->
+        <activity android:name=".rv.kotlin.basic.RvMain"/>
+        <activity android:name=".rv.kotlin.search.RvMain"/>
+        <activity android:name=".rv.kotlin.refresh.RvMain"/>
+        <activity android:name=".rv.kotlin.reorder.RvMain"/>
+        <activity android:name=".rv.kotlin.multi_select.RvMain"/>
+        <activity android:name=".rv.kotlin.expand.RvMain"/>
+        <activity android:name=".rv.kotlin.diffutil.RvMain"/>
+        <activity android:name=".rv.kotlin.adv.swipe_drag_gesture.RvMain"/>
+        <activity android:name="com.dinesh.android.rv.kotlin.nested.v0.RvMain"/>
+        <activity android:name="com.dinesh.android.rv.kotlin.nested.v1.RvMain"/>
+        <activity android:name="com.dinesh.android.rv.kotlin.nested.v2.RvMain"/>
+        <activity android:name="com.dinesh.android.rv.kotlin.multi_view.RvMain"/>
+        <activity android:name="com.dinesh.android.rv.kotlin.listadapter.RvMain"/>
+
+
+<!--        test     -->
+        <activity android:name=".test.Testing"/>
+
+
+
+    </application>
+
+</manifest>
