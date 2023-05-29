@@ -2,27 +2,41 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
-    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES"/>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-                     android:maxSdkVersion="28"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-                     android:maxSdkVersion="33" />
+                     android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="32" />
+<!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />-->
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"
+                     android:minSdkVersion="33" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"
+                     android:minSdkVersion="33" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
 
     <application
         android:name=".app.MyApp"
@@ -47,66 +61,67 @@
             </intent-filter>
         </activity>
 
-<!--        app     -->
-        <activity android:name=".app.Root"/>
-        <activity android:name=".app.ThemePreference"/>
-        <activity android:name=".app.ToolbarMain"/>
-        <activity android:name=".app.BaseActivity"/>
-        <activity android:name=".app.RequestPermission"/>
+        <!--        app     -->
+        <activity android:name=".app.Root" />
+        <activity android:name=".app.ThemePreference" />
+        <activity android:name=".app.ToolbarMain" />
+        <activity android:name=".app.BaseActivity" />
+        <activity android:name=".app.RequestPermission" />
+        <activity android:name=".app.tab_layout.MainActivity" />
 
-<!--        app.user_interface     -->
-        <activity android:name=".app.user_interface.CollapsingToolbar"/>
+        <!--        app.user_interface     -->
+        <activity android:name=".app.user_interface.CollapsingToolbar" />
 
-<!--        app.user_interface.notification     -->
-        <activity android:name=".app.user_interface.notification.MainActivity"/>
-        <receiver android:name=".app.user_interface.notification.Button1Receiver"/>
-        <receiver android:name=".app.user_interface.notification.Button2Receiver"/>
+        <!--        app.user_interface.notification     -->
+        <activity android:name=".app.user_interface.notification.MainActivity" />
 
-<!--        root     -->
-        <activity android:name=".root.RvMain"/>
+        <receiver android:name=".app.user_interface.notification.Button1Receiver" />
+        <receiver android:name=".app.user_interface.notification.Button2Receiver" />
 
-<!--        kotlin.Activity     -->
-        <activity android:name=".kotlin.activity.PhotoPicker"/>
-        <activity android:name=".kotlin.activity.LayoutInflaterClass"/>
+        <!--        root     -->
+        <activity android:name=".root.RvMain" />
 
-<!--        kotlin.Retrofit     -->
-        <activity android:name=".kotlin.retrofit.raw.ReadJSON"/>
-        <activity android:name=".kotlin.retrofit.v0.ApiMain"/>
-        <activity android:name=".kotlin.retrofit.v1.ApiMain"/>
-        <activity android:name=".kotlin.retrofit.v2.ApiMain"/>
-        <activity android:name=".kotlin.retrofit.livedata.ApiMain"/>
-        <activity android:name=".kotlin.retrofit.v3.ApiMain"/>
+        <!--        kotlin.Activity     -->
+        <activity android:name=".kotlin.activity.PhotoPicker" />
+        <activity android:name=".kotlin.activity.LayoutInflaterClass" />
 
-<!--        java     -->
-        <activity android:name=".java.dialog.Rv_as_Dialog"/>
+        <!--        kotlin.Retrofit     -->
+        <activity android:name=".kotlin.retrofit.raw.ReadJSON" />
+        <activity android:name=".kotlin.retrofit.v0.ApiMain" />
+        <activity android:name=".kotlin.retrofit.v1.ApiMain" />
+        <activity android:name=".kotlin.retrofit.v2.ApiMain" />
+        <activity android:name=".kotlin.retrofit.livedata.ApiMain" />
+        <activity android:name=".kotlin.retrofit.v3.ApiMain" />
 
-<!--        rv.java     -->
-        <activity android:name=".rv.java.basic.RvMain"/>
-        <activity android:name=".rv.java.search.RvMain"/>
-        <activity android:name=".rv.java.refresh.RvMain"/>
-        <activity android:name=".rv.java.reorder.RvMain"/>
-        <activity android:name=".rv.java.multi_select.RvMain"/>
-        <activity android:name=".rv.java.expand.RvMain"/>
+        <!--        java     -->
+        <activity android:name=".java.dialog.Rv_as_Dialog" />
 
-<!--        rv.kotlin     -->
-        <activity android:name=".rv.kotlin.basic.RvMain"/>
-        <activity android:name=".rv.kotlin.search.RvMain"/>
-        <activity android:name=".rv.kotlin.refresh.RvMain"/>
-        <activity android:name=".rv.kotlin.reorder.RvMain"/>
-        <activity android:name=".rv.kotlin.multi_select.RvMain"/>
-        <activity android:name=".rv.kotlin.expand.RvMain"/>
-        <activity android:name=".rv.kotlin.diffutil.RvMain"/>
-        <activity android:name=".rv.kotlin.adv.swipe_drag_gesture.RvMain"/>
-        <activity android:name="com.dinesh.android.rv.kotlin.nested.v0.RvMain"/>
-        <activity android:name="com.dinesh.android.rv.kotlin.nested.v1.RvMain"/>
-        <activity android:name="com.dinesh.android.rv.kotlin.nested.v2.RvMain"/>
-        <activity android:name="com.dinesh.android.rv.kotlin.multi_view.RvMain"/>
-        <activity android:name="com.dinesh.android.rv.kotlin.listadapter.RvMain"/>
+        <!--        rv.java     -->
+        <activity android:name=".rv.java.basic.RvMain" />
+        <activity android:name=".rv.java.search.RvMain" />
+        <activity android:name=".rv.java.refresh.RvMain" />
+        <activity android:name=".rv.java.reorder.RvMain" />
+        <activity android:name=".rv.java.multi_select.RvMain" />
+        <activity android:name=".rv.java.expand.RvMain" />
+
+        <!--        rv.kotlin     -->
+        <activity android:name=".rv.kotlin.basic.RvMain" />
+        <activity android:name=".rv.kotlin.search.RvMain" />
+        <activity android:name=".rv.kotlin.refresh.RvMain" />
+        <activity android:name=".rv.kotlin.reorder.RvMain" />
+        <activity android:name=".rv.kotlin.multi_select.RvMain" />
+        <activity android:name=".rv.kotlin.expand.RvMain" />
+        <activity android:name=".rv.kotlin.diffutil.RvMain" />
+        <activity android:name=".rv.kotlin.adv.swipe_drag_gesture.RvMain" />
+        <activity android:name="com.dinesh.android.rv.kotlin.nested.v0.RvMain" />
+        <activity android:name="com.dinesh.android.rv.kotlin.nested.v1.RvMain" />
+        <activity android:name="com.dinesh.android.rv.kotlin.nested.v2.RvMain" />
+        <activity android:name="com.dinesh.android.rv.kotlin.multi_view.RvMain" />
+        <activity android:name="com.dinesh.android.rv.kotlin.listadapter.RvMain" />
 
 
-<!--        test     -->
-        <activity android:name=".test.Testing"/>
-
+        <!--        test     -->
+        <activity android:name=".test.Testing" />
 
 
     </application>
