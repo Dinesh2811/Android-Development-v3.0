@@ -14,9 +14,9 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.coroutineContext
 
-object ApiClient {
-    private val TAG = "log_" + ApiClient::class.java.name.split(ApiClient::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
+private val TAG = "log_" + ApiClient::class.java.name.split(ApiClient::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
+object ApiClient {
     //    private const val BASE_URL = "http://10.0.2.2/"
     private const val TIMEOUT_SECONDS = 30L
     private const val RETRY_COUNT = 3

@@ -15,20 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-//
-//import android.os.Bundle
-//import androidx.appcompat.app.AppCompatActivity
-//import android.util.Log
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-//import androidx.lifecycle.lifecycleScope
-//import com.dinesh.android.kotlin.retrofit.ApiClient
-//import com.dinesh.android.kotlin.retrofit.ApiState
-//import com.dinesh.android.kotlin.retrofit.logJsonData
-//import kotlinx.coroutines.Dispatchers
-//import kotlinx.coroutines.launch
-//import kotlinx.coroutines.withContext
-
 private val TAG = "log_" + ApiMain::class.java.name.split(ApiMain::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
 class ApiMain : ToolbarMain() {

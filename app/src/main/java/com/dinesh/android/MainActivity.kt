@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity() {
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
 //        launchActivity(com.dinesh.android.root.RvMain::class.java)
-//        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
-        launchActivity(com.dinesh.android.app.tab_layout.MainActivity::class.java)
+        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
+//        launchActivity(com.dinesh.android.kotlin.retrofit.v4_test.ApiMain::class.java)
 
         logColor()
 
