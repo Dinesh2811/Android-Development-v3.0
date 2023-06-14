@@ -94,6 +94,9 @@
         <activity android:name=".kotlin.retrofit.v3.ApiMain" />
         <activity android:name=".kotlin.retrofit.v4_test.ApiMain" />
 
+        <activity android:name=".kotlin.retrofit.authorization.bearer.MainActivity" />
+        <activity android:name=".kotlin.retrofit.api.ApiMain" />
+
         <!--        java     -->
         <activity android:name=".java.dialog.Rv_as_Dialog" />
 
@@ -124,6 +127,19 @@
         <!--        test     -->
         <activity android:name=".test.Testing" />
 
+
+        <receiver
+            android:name=".kotlin.widget.MyWidget"
+            android:label="My Widget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/my_widget_info" />
+        </receiver>
 
     </application>
 

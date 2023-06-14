@@ -21,10 +21,19 @@ import com.dinesh.android.app.ToolbarMain
 private val TAG = "log_" + PhotoPicker::class.java.name.split(PhotoPicker::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
 class PhotoPicker : ToolbarMain() {
+    private val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+        if (uri != null) {
+            Log.d(TAG, "uri --> ${uri}")
+        } else {
+            Log.e(TAG, "Image URI is null")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentViewLayout(R.layout.photo_picker)
+
+        pickImage.launch(PickVisualMediaRequest())
 
 //        pickMedia().launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
 //        pickMultipleMedia().launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
@@ -46,16 +55,16 @@ class PhotoPicker : ToolbarMain() {
     private fun pickMedia() = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
         // Handle the selected photo
         if (uri != null) {
-            Log.e(TAG, ": ${uri}")
+            Log.e(TAG, "uri --> ${uri}")
         }
     }
 
     private fun pickMultipleMedia() = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
         // Handle the selected multiple photo
         if (uris.isNotEmpty()) {
-            Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
+            Log.d(TAG, "Number of items selected: ${uris.size}")
         } else {
-            Log.d("PhotoPicker", "No media selected")
+            Log.d(TAG, "No media selected")
         }
     }
 }
