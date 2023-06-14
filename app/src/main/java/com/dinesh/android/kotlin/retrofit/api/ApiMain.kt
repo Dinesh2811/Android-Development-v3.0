@@ -40,7 +40,7 @@ class ApiMain : AppCompatActivity() {
     }
 
     private fun fetchData() {
-//        getCustomers()
+        getCustomers()
 //        getCustomerById("1")
 //        searchCustomers("john", null)
 //        getCustomerField("2", "products", "Product 3")
@@ -49,7 +49,7 @@ class ApiMain : AppCompatActivity() {
 //        getBearerAuthenticatedCustomers("Bearer $token")
 
 //        addProductToCustomerCart("1", "Product 4", "49.99", 1, null)
-        pickImage.launch(PickVisualMediaRequest())
+//        pickImage.launch(PickVisualMediaRequest())
     }
 
     private fun getCustomers() {
