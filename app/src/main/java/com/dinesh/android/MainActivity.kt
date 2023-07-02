@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dinesh.android.app.*
 import com.dinesh.android.java.dialog.Rv_as_Dialog
+import com.dinesh.android.kotlin.activity.animation.lottie.LottieAnimation
 import com.dinesh.android.ui.theme.Material3Theme
 
 private val TAG = "log_" + MainActivity::class.java.name.split(MainActivity::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
@@ -20,15 +21,14 @@ private val TAG = "log_" + MainActivity::class.java.name.split(MainActivity::cla
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
+//        setContentView(R.layout.floating_layout)
+//        init()
 //        val classNameAsString = getSharedPreferences("sharedPreferences_$packageName", MODE_PRIVATE).getString("classNameTesting", com.dinesh.android.root.RvMain::class.java.name)
 //        Log.e(TAG, "classNameAsString: $classNameAsString")
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
-//        launchActivity(com.dinesh.android.root.RvMain::class.java)
+        launchActivity(com.dinesh.android.root.RvMain::class.java)
 //        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
-//        launchActivity(com.dinesh.android.kotlin.retrofit.authorization.bearer.MainActivity::class.java)
-        launchActivity(com.dinesh.android.kotlin.retrofit.api.ApiMain::class.java)
 
         logColor()
 

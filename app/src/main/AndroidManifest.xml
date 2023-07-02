@@ -38,6 +38,8 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
@@ -84,6 +86,12 @@
         <!--        kotlin.Activity     -->
         <activity android:name=".kotlin.activity.PhotoPicker" />
         <activity android:name=".kotlin.activity.LayoutInflaterClass" />
+        <activity android:name=".kotlin.activity.floating_window.v0.MainActivity" />
+        <service
+            android:name=".kotlin.activity.floating_window.v0.FloatingWindowService"
+            android:enabled="true"
+            android:exported="false" />
+        <activity android:name=".kotlin.activity.animation.lottie.LottieAnimation"/>
 
         <!--        kotlin.Retrofit     -->
         <activity android:name=".kotlin.retrofit.raw.ReadJSON" />
@@ -95,6 +103,8 @@
         <activity android:name=".kotlin.retrofit.v4_test.ApiMain" />
 
         <activity android:name=".kotlin.retrofit.authorization.bearer.MainActivity" />
+        <activity android:name=".kotlin.retrofit.authorization.bearer.MainActivity_v1" />
+        <activity android:name=".kotlin.retrofit.authorization.bearer.MainActivity_v2" />
         <activity android:name=".kotlin.retrofit.api.ApiMain" />
 
         <!--        java     -->
@@ -107,6 +117,8 @@
         <activity android:name=".rv.java.reorder.RvMain" />
         <activity android:name=".rv.java.multi_select.RvMain" />
         <activity android:name=".rv.java.expand.RvMain" />
+        <activity android:name=".rv.java.nested.v0.RvMain" />
+        <activity android:name=".rv.java.nested.v0.NewActivity" />
 
         <!--        rv.kotlin     -->
         <activity android:name=".rv.kotlin.basic.RvMain" />
@@ -122,6 +134,7 @@
         <activity android:name="com.dinesh.android.rv.kotlin.nested.v2.RvMain" />
         <activity android:name="com.dinesh.android.rv.kotlin.multi_view.RvMain" />
         <activity android:name="com.dinesh.android.rv.kotlin.listadapter.RvMain" />
+        <activity android:name="com.dinesh.android.rv.kotlin.floating_context_menu.RvMain" />
 
 
         <!--        test     -->

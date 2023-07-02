@@ -74,6 +74,8 @@ dependencies {
     implementation(libs.glide)
     ksp(libs.compiler)
 
+    implementation("com.airbnb.android:lottie:6.0.1")
+
     implementation(libs.volley)
     implementation(libs.androidx.swiperefreshlayout)    //  RecyclerView
 
