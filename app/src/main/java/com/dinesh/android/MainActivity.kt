@@ -1,7 +1,6 @@
 package com.dinesh.android
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,8 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dinesh.android.app.*
-import com.dinesh.android.java.dialog.Rv_as_Dialog
-import com.dinesh.android.kotlin.activity.animation.lottie.LottieAnimation
 import com.dinesh.android.ui.theme.Material3Theme
 
 private val TAG = "log_" + MainActivity::class.java.name.split(MainActivity::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
@@ -27,7 +24,8 @@ class MainActivity : AppCompatActivity() {
 //        Log.e(TAG, "classNameAsString: $classNameAsString")
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
-        launchActivity(com.dinesh.android.root.RvMain::class.java)
+//        launchActivity(com.dinesh.android.root.RvMain::class.java)
+        launchActivity(com.dinesh.android.app.user_interface.notification.v0.MainActivity::class.java)
 //        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
 
         logColor()

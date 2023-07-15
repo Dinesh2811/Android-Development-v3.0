@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
                      android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -92,6 +93,7 @@
             android:enabled="true"
             android:exported="false" />
         <activity android:name=".kotlin.activity.animation.lottie.LottieAnimation"/>
+        <activity android:name=".app.user_interface.notification.v0.MainActivity"/>
 
         <!--        kotlin.Retrofit     -->
         <activity android:name=".kotlin.retrofit.raw.ReadJSON" />
