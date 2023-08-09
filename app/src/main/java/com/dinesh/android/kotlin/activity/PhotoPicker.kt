@@ -38,11 +38,6 @@ class PhotoPicker : ToolbarMain() {
 //        pickMedia().launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
 //        pickMultipleMedia().launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
 
-        test()
-    }
-
-    private fun test() {
-
     }
 
     private fun createImageView(imageResId: Int): ImageView {

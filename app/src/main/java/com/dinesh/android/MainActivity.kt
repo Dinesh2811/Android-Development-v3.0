@@ -24,8 +24,7 @@ class MainActivity : AppCompatActivity() {
 //        Log.e(TAG, "classNameAsString: $classNameAsString")
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
-//        launchActivity(com.dinesh.android.root.RvMain::class.java)
-        launchActivity(com.dinesh.android.app.user_interface.notification.v0.MainActivity::class.java)
+        launchActivity(com.dinesh.android.root.RvMain::class.java)
 //        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
 
         logColor()

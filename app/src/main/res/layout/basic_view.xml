@@ -35,8 +35,9 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/backButton"
                     style="@style/styleButton"
-                    android:text="Button" />
+                    android:text="Back Button" />
 
 
                 <EditText

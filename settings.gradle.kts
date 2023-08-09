@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://jitpack.io")
     }
 }
 dependencyResolutionManagement {
@@ -13,6 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android Development v3.0"
+rootProject.name = "ProjectTemplate"
 include(":app")
-
