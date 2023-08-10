@@ -19,15 +19,15 @@ class UserRepository(application: Application?) {
         executorService = Executors.newSingleThreadExecutor()
     }
 
-    fun insert(user: User?) {
+    fun insert(user: User) {
         executorService.execute { userDao!!.insert(user) }
     }
 
-    fun update(user: User?) {
+    fun update(user: User) {
         executorService.execute { userDao!!.update(user) }
     }
 
-    fun delete(user: User?) {
+    fun delete(user: User) {
         executorService.execute { userDao!!.delete(user) }
     }
 

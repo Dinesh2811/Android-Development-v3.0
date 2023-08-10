@@ -7,7 +7,7 @@ import androidx.room.*
 @Dao
 interface UserDao {
     @Insert
-    fun insert(user: User?)
+    fun insert(user: User)
 
     @Query("SELECT * FROM user_table WHERE username = :username AND password = :password")
     fun getUserByUsernameAndPassword(username: String?, password: String?): User?
@@ -65,7 +65,7 @@ interface UserDao {
     val usersByUsernameIsNotJohnAndPasswordIsNotNullAndLengthGreaterThan8OrIdBetween5And10: List<User?>?
 
     @Update
-    fun update(user: User?)
+    fun update(user: User)
 
     @Query("UPDATE user_table SET password = :password WHERE username LIKE 'A%'")
     fun updateUserPasswordByUsernameStartsWithA(password: String?)
@@ -77,7 +77,7 @@ interface UserDao {
     fun delete(userId: Int)
 
     @Delete
-    fun delete(user: User?)
+    fun delete(user: User)
 
     @Query("DELETE FROM user_table WHERE password IS NOT NULL AND username LIKE 'A%'")
     fun deleteUserPasswordByUsernameStartsWithA()

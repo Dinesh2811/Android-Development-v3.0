@@ -20,15 +20,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         executor = Executors.newSingleThreadExecutor()
     }
 
-    fun insert(user: User?) {
+    fun insert(user: User) {
         executor.execute { userDao!!.insert(user) }
     }
 
-    fun update(user: User?) {
+    fun update(user: User) {
         executor.execute { userDao!!.update(user) }
     }
 
-    fun delete(user: User?) {
+    fun delete(user: User) {
         executor.execute { userDao!!.delete(user) }
     }
 
