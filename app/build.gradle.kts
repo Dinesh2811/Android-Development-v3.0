@@ -105,6 +105,8 @@ dependencies {
     // Location Services
     implementation(libs.play.services.location)
 
+    // Shimmer
+    implementation(libs.shimmer)
 }
 
 
@@ -121,11 +123,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("junit:junit:4.13.2")
 
-//    material3 --> 1.2.0-alpha04
     implementation("androidx.compose.material3:material3:1.2.0-alpha04")
     implementation("androidx.compose.material3:material3-android:1.2.0-alpha04")
 
-//    compose --> 1.4.3
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-graphics:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
@@ -147,19 +147,16 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
 
-//    compose-bom --> 2023.06.01
     implementation("androidx.compose:compose-bom:2023.06.01")
     androidTestImplementation("androidx.compose:compose-bom:2023.06.01")
 
 
-//    androidx.room --> 2.5.2
     //  Room components
     implementation("androidx.room:room-runtime:2.5.2")
 //    kapt("androidx.room:room-compiler:2.5.2")
     ksp("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
 
-//    androidx.lifecycle --> 2.6.1
     //  ViewModel & LiveData
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
@@ -168,17 +165,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
-//    com.github.bumptech.glide --> 4.15.1
     // Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
-//    com.squareup.retrofit2 --> 2.9.0
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:retrofit-mock:2.9.0")
 
-//    com.squareup.okhttp3 --> 5.0.0-alpha.8
     // HTTP
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.8")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.8")
@@ -187,7 +181,6 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Gson Converter
     implementation("com.google.code.gson:gson:2.10.1") // Used to convert Java Object into JSON representation
 
-//    androidx.navigation --> 2.6.0
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
@@ -210,136 +203,3 @@ dependencies {
 
 }
  */
-
-/*
-
-dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.material)
-
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.junit)
-
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.material3.android)
-
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-
-    implementation(libs.androidx.material)
-    implementation(libs.androidx.material.icons.core)
-    implementation(libs.androidx.material.icons.extended)
-
-    implementation(libs.androidx.animation.core)
-    implementation(libs.androidx.animation)
-    implementation(libs.androidx.foundation)
-    implementation(libs.androidx.ui.geometry)
-    implementation(libs.androidx.foundation.layout)
-    implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.ui.text)
-    implementation(libs.androidx.ui.util)
-    implementation(libs.androidx.ui.viewbinding)
-
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
-    implementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-
-
-    //  Room components
-    implementation(libs.androidx.room.runtime)
-//    kapt(libs.androidx.room.compiler)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-
-    //  ViewModel & LiveData
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-
-    // Glide
-    implementation(libs.glide)
-    annotationProcessor(libs.compiler)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.mock)
-
-    // HTTP
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-
-    // Gson
-    implementation(libs.converter.gson) // Gson Converter
-    implementation(libs.gson) // Used to convert Java Object into JSON representation
-
-    // Navigation Component
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-
-    // Lottie
-    implementation(libs.lottie)
-
-    // Volley
-    implementation(libs.volley)
-
-    // RecyclerView
-    implementation(libs.androidx.swiperefreshlayout)
-
-    // Paging
-    implementation(libs.androidx.lifecycle.extensions)
-    implementation(libs.androidx.paging.runtime.ktx)
-
-    // Location Services
-    implementation(libs.play.services.location)
-
-}
-
- */
-
-/*
-
-dependencies {
-
-    implementation(libs.bundles.android)
-    implementation(libs.bundles.material)
-    androidTestImplementation(libs.bundles.android.test.implementation)
-    debugImplementation(libs.bundles.debug.implementation)
-    testImplementation(libs.junit)
-    implementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-
-    implementation(libs.bundles.lifecycle.viewmodel.livedata)
-    implementation(libs.bundles.navigation.ui)
-    implementation(libs.bundles.retrofit)
-    implementation(libs.bundles.okhttp)
-    implementation(libs.bundles.gson)
-
-    implementation(libs.bundles.room)
-    ksp(libs.androidx.room.compiler)
-
-    implementation(libs.glide)
-    ksp(libs.compiler)
-
-    implementation(libs.volley)
-    implementation(libs.androidx.swiperefreshlayout)    //  RecyclerView
-
-    //  Paging
-    implementation(libs.androidx.lifecycle.extensions)
-    implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.paging.runtime)
-
-    implementation("com.airbnb.android:lottie:6.0.1")
-}
-
-*/

@@ -97,10 +97,13 @@
             android:enabled="true"
             android:exported="false" />
         <activity android:name=".kotlin.activity.animation.lottie.LottieAnimation"/>
+        <activity android:name=".kotlin.activity.animation.shimmer.ShimmerAnimationActivity"/>
         <activity android:name=".app.user_interface.notification.v0.MainActivity"/>
         <activity android:name=".kotlin.activity.location.MainActivity"/>
         <service android:name=".kotlin.activity.location.LocationService"
                  android:foregroundServiceType="location" />
+        <activity android:name=".kotlin.activity.fixed_size.FixedSizeActivity"/>
+        <activity android:name=".kotlin.activity.reactive.state_flow.StateFlowMain"/>
 
         <!--        kotlin.Retrofit     -->
         <activity android:name=".kotlin.retrofit.raw.ReadJSON" />
