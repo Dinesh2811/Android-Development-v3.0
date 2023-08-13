@@ -80,8 +80,8 @@
         <activity android:name=".app.user_interface.CollapsingToolbar" />
 
         <!--        app.user_interface.notification     -->
+        <activity android:name=".app.user_interface.notification.v0.MainActivity"/>
         <activity android:name=".app.user_interface.notification.MainActivity" />
-
         <receiver android:name=".app.user_interface.notification.Button1Receiver" />
         <receiver android:name=".app.user_interface.notification.Button2Receiver" />
 
@@ -98,7 +98,6 @@
             android:exported="false" />
         <activity android:name=".kotlin.activity.animation.lottie.LottieAnimation"/>
         <activity android:name=".kotlin.activity.animation.shimmer.ShimmerAnimationActivity"/>
-        <activity android:name=".app.user_interface.notification.v0.MainActivity"/>
         <activity android:name=".kotlin.activity.location.MainActivity"/>
         <service android:name=".kotlin.activity.location.LocationService"
                  android:foregroundServiceType="location" />
