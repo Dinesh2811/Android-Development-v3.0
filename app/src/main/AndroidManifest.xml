@@ -84,6 +84,8 @@
         <activity android:name=".app.user_interface.notification.MainActivity" />
         <receiver android:name=".app.user_interface.notification.Button1Receiver" />
         <receiver android:name=".app.user_interface.notification.Button2Receiver" />
+        <activity android:name=".app.user_interface.notification.services.MainActivity"/>
+        <receiver android:name=".app.user_interface.notification.services.CounterNotificationReceiver"/>
 
         <!--        root     -->
         <activity android:name=".root.RvMain" />

@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 @Preview
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun StickyHeaders() {
+fun MyStickyHeaders() {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()

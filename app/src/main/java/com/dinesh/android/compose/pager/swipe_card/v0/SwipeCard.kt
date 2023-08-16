@@ -1,4 +1,4 @@
-package com.dinesh.android.compose.card_swipe.v0
+package com.dinesh.android.compose.pager.swipe_card.v0
 
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -31,7 +31,7 @@ private val TAG = "log_SwipeCard"
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-private fun SwipeCardMainScreen(modifier: Modifier = Modifier) {
+private fun MySwipeCardMainScreen(modifier: Modifier = Modifier) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val pageWidth = (screenWidth / 3f).dp
 
@@ -41,7 +41,7 @@ private fun SwipeCardMainScreen(modifier: Modifier = Modifier) {
     MaterialTheme {
         Surface(modifier = modifier, color = MaterialTheme.colorScheme.background) {
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-                AnimatedViewPager(modifier = Modifier.fillMaxWidth(), pageSize = pageWidth, listOfCardData = listOfCardData)
+                MyAnimatedViewPager(modifier = Modifier.fillMaxWidth(), pageSize = pageWidth, listOfCardData = listOfCardData)
             }
         }
     }
@@ -49,14 +49,14 @@ private fun SwipeCardMainScreen(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun AnimatedViewPager(modifier: Modifier = Modifier, pageSize: Dp, listOfCardData: List<CardData>) {
+private fun MyAnimatedViewPager(modifier: Modifier = Modifier, pageSize: Dp, listOfCardData: List<CardData>) {
     val pagerState = rememberPagerState(initialPage = 0, initialPageOffsetFraction = 0f, pageCount = { listOfCardData.size })
 
     HorizontalPager(modifier = modifier, state = pagerState, contentPadding = PaddingValues(horizontal = pageSize), verticalAlignment = Alignment.CenterVertically) { thisPageIndex ->
         val pageOffset = (pagerState.currentPage - thisPageIndex) + pagerState.currentPageOffsetFraction
         val scale = 1f - pageOffset.absoluteValue.coerceIn(0f, 1f) * 0.5f
 
-        PageLayout(
+        MyPageLayout(
             modifier = Modifier
                 .size(size = pageSize)
                 .graphicsLayer {
@@ -71,7 +71,7 @@ private fun AnimatedViewPager(modifier: Modifier = Modifier, pageSize: Dp, listO
 }
 
 @Composable
-private fun PageLayout(modifier: Modifier = Modifier, cardData: CardData) {
+private fun MyPageLayout(modifier: Modifier = Modifier, cardData: CardData) {
     Card(modifier = modifier) {
         Column(modifier = modifier
             .fillMaxSize()) {

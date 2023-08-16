@@ -1,4 +1,4 @@
-package com.dinesh.android.compose.scaffold_layout
+package com.dinesh.android.compose.scaffold_layout.v0
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -16,6 +16,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -60,7 +61,7 @@ fun MyScaffoldLayout() {
         drawerContent = {
             Column(Modifier.fillMaxSize()) {
                 Text(text = "Drawer Header", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.padding(16.dp))
-                Divider()
+                HorizontalDivider()
                 Text(text = "Item 1", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(16.dp))
                 Text(text = "Item 2", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.padding(16.dp))
             }

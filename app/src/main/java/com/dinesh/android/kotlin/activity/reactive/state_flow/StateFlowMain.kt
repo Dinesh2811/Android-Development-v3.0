@@ -2,18 +2,16 @@ package com.dinesh.android.kotlin.activity.reactive.state_flow
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
-import com.dinesh.android.compose.scaffold_layout.MyScaffoldLayout
+import com.dinesh.android.compose.scaffold_layout.v0.MyScaffoldLayout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,16 +20,19 @@ import kotlinx.coroutines.launch
 private val TAG = "log_" + StateFlowMain::class.java.name.split(StateFlowMain::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
 class StateFlowMain : AppCompatActivity() {
-    private lateinit var stateFlowViewModel: StateFlowViewModel
+//    private lateinit var stateFlowViewModel: StateFlowViewModel
+    private val stateFlowViewModel: StateFlowViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        stateFlowViewModel = ViewModelProvider(this)[StateFlowViewModel::class.java]
+//        stateFlowViewModel = ViewModelProvider(this)[StateFlowViewModel::class.java]
         setContent {
             /*
+            //  val viewModel = viewModel<StateFlowViewModel>()
             stateFlowViewModel.stateFlow.collectAsStateWithLifecycle()
             stateFlowViewModel.liveData.observeAsState()
              */
+
 
             MyScaffoldLayout()
         }
