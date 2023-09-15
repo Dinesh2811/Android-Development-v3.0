@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dinesh.android.app.*
+import com.dinesh.android.compose.state.view_model.v3.MyLayoutView
 import com.dinesh.android.ui.theme.Material3Theme
 
 private val TAG = "log_" + MainActivity::class.java.name.split(MainActivity::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
@@ -24,10 +25,13 @@ class MainActivity : AppCompatActivity() {
 //        Log.e(TAG, "classNameAsString: $classNameAsString")
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
-        launchActivity(com.dinesh.android.root.RvMain::class.java)
-        launchActivity(com.dinesh.android.app.user_interface.notification.services.MainActivity::class.java)
+//        launchActivity(com.dinesh.android.root.RvMain::class.java)
+//        launchActivity(com.dinesh.android.app.user_interface.notification.services.MainActivity::class.java)
 //        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
 
+        setContent {
+            MyLayoutView()
+        }
         logColor()
 
     }
