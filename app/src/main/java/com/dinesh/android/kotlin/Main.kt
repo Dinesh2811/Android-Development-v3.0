@@ -17,9 +17,9 @@ class Main : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = BasicViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        
         binding.backButton.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {

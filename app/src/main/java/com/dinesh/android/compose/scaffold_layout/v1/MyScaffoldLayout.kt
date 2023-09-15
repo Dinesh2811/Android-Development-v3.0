@@ -96,7 +96,7 @@ fun MyScaffoldLayout(showTopAppBar: Boolean = true, tab: ShowTab, bottomNav: Sho
 private fun MyTopAppBar(scrollBehavior: TopAppBarScrollBehavior, surfaceColor: Color) {
     MediumTopAppBar(
         title = {
-            Text(text = "Jetpack Compose TabLayout {scrollBehavior.state.heightOffset}", maxLines = 1,
+            Text(text = "Jetpack Compose TabLayout ${scrollBehavior.state.heightOffset}", maxLines = 1,
                 overflow = TextOverflow.Ellipsis, color = MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleMedium)
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = surfaceColor),

@@ -12,11 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.dinesh.android.app.*
 import com.dinesh.android.compose.state.view_model.v3.MyLayoutView
+import com.dinesh.android.kotlin.activity.location.PermissionCallback
+import com.dinesh.android.kotlin.activity.location.PermissionHandler
 import com.dinesh.android.ui.theme.Material3Theme
 
 private val TAG = "log_" + MainActivity::class.java.name.split(MainActivity::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
-class MainActivity : AppCompatActivity() {
+//class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PermissionCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.floating_layout)
@@ -25,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 //        Log.e(TAG, "classNameAsString: $classNameAsString")
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
-//        launchActivity(com.dinesh.android.root.RvMain::class.java)
-//        launchActivity(com.dinesh.android.app.user_interface.notification.services.MainActivity::class.java)
+        launchActivity(com.dinesh.android.root.RvMain::class.java)
+//        launchActivity(com.dinesh.android.kotlin.activity.location.MainActivity::class.java)
 //        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
 
         setContent {
@@ -34,6 +37,13 @@ class MainActivity : AppCompatActivity() {
         }
         logColor()
 
+    }
+
+    private lateinit var permissionHandler: PermissionHandler
+    override fun onStart() {
+        super.onStart()
+        permissionHandler = PermissionHandler(this, this)
+        permissionHandler.requestPermissions()
     }
 
     private fun logColor() {
@@ -105,6 +115,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onAllPermissionsGranted() {
     }
 
 }
