@@ -7,14 +7,11 @@ import android.util.Log
 
 
 class FloatingWindowService : Service() {
-    private val TAG = "log_" + FloatingWindowService::class.java.name.split(FloatingWindowService::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
-
     private lateinit var floatingWindowManager: FloatingWindowManager
 
     override fun onCreate() {
         super.onCreate()
         floatingWindowManager = FloatingWindowManager(applicationContext)
-        Log.e(TAG, "onCreate: ")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

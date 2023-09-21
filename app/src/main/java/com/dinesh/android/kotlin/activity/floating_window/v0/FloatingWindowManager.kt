@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.core.view.doOnLayout
 import com.dinesh.android.R
 
@@ -20,7 +21,6 @@ class FloatingWindowManager(private val context: Context) {
 
     fun showFloatingWindow(rootWidth: Int, rootHeight: Int) {
         if (floatingView == null) {
-            floatingView = LayoutInflater.from(context).inflate(R.layout.floating_layout, null)
 
             floatingView?.doOnLayout {
                 val floatingWidth = floatingView?.width
@@ -33,6 +33,8 @@ class FloatingWindowManager(private val context: Context) {
                 width = WindowManager.LayoutParams.WRAP_CONTENT
                 height = WindowManager.LayoutParams.WRAP_CONTENT
                 gravity = Gravity.CENTER
+                x = 0
+                y = 0
                 type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 } else {
@@ -45,9 +47,18 @@ class FloatingWindowManager(private val context: Context) {
                 format = PixelFormat.TRANSLUCENT
             }
 
+            floatingView = LayoutInflater.from(context).inflate(R.layout.floating_layout, null)
+
             floatingView?.let {
-                val touchListener = FloatingWindowTouchListener(layoutParams, windowManager, rootWidth, rootHeight)
+//                val touchListener = FloatingWindowTouchListener(layoutParams, windowManager, rootWidth, rootHeight)
+                val touchListener = FloatingWindowTouchListener(layoutParams, windowManager, rootWidth, rootHeight, it.findViewById<ImageView>(R.id.imageView))
                 it.setOnTouchListener(touchListener)
+
+//                val imageView = it.findViewById<ImageView>(R.id.imageView)
+//                imageView.setOnClickListener {
+//                    Log.d(TAG, "ImageView clicked") // Add this line to log the click
+//                    // Handle the click event here
+//                }
             }
             windowManager.addView(floatingView, layoutParams)
         }
