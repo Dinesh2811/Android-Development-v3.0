@@ -1,4 +1,4 @@
-package com.dinesh.android.kotlin.database.room
+package com.dinesh.android.kotlin.database.room.v0
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,5 +1,6 @@
 package com.dinesh.android.kotlin
 
+import android.app.Activity
 import android.view.View
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -33,4 +34,24 @@ class Main : AppCompatActivity() {
         return findViewById<T>(id)
     }
 
+    /*
+
+    private fun requestReview(context: Activity){
+//        implementation("com.google.android.play:review:2.0.1")
+//        implementation("com.google.android.play:review-ktx:2.0.1")  //  Play In-App Review
+        val manager = ReviewManagerFactory.create(context)
+//        val manager = FakeReviewManager(context)
+        val request = manager.requestReviewFlow()
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val reviewInfo = task.result
+                manager.launchReviewFlow(context, task.result)
+                Log.i(TAG, "requestReview: ${reviewInfo}")
+            } else{
+                Log.e(TAG, "requestReview: ${task}")
+            }
+        }
+    }
+
+     */
 }
