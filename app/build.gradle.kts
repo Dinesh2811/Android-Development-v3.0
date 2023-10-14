@@ -1,9 +1,12 @@
 plugins {
 //    alias(libs.plugins.androidApplication)
 //    alias(libs.plugins.kotlinAndroid)
+
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")   // ksp
+//    id("kotlin-kapt")   // kapt
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -78,16 +81,20 @@ android {
     }
 }
 
+tasks.withType<JavaCompile>().configureEach {
+    options.isIncremental = true
+}
+
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-compose:1.7.2")
+    implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.material:material:1.11.0-alpha03")
 
-    implementation("androidx.compose.material3:material3:1.2.0-alpha08")
-    implementation("androidx.compose.material3:material3-android:1.2.0-alpha08")
-    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha08")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha09")
+    implementation("androidx.compose.material3:material3-android:1.2.0-alpha09")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha09")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
@@ -152,9 +159,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.8")
 
     // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
-    implementation("androidx.navigation:navigation-compose:2.7.3")  // Navigation Compose
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-compose:2.7.4")  // Navigation Compose
 
     // Paging
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
@@ -172,6 +179,18 @@ dependencies {
 
     // Volley
     implementation("com.android.volley:volley:1.2.1")
+
+    //  Dagger
+    implementation("com.google.dagger:dagger:2.48.1")
+    implementation("com.google.dagger:dagger-android:2.48.1")
+    implementation("com.google.dagger:dagger-android-support:2.48.1")
+    ksp("com.google.dagger:dagger-compiler:2.48.1")
+
+    //  Hilt
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    ksp("androidx.hilt:hilt-compiler:1.0.0")
 
 }
 

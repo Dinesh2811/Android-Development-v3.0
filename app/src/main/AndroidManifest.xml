@@ -114,6 +114,8 @@
         <activity android:name=".kotlin.retrofit.livedata.ApiMain" />
         <activity android:name=".kotlin.retrofit.v3.ApiMain" />
         <activity android:name=".kotlin.retrofit.v4_test.ApiMain" />
+        <activity android:name=".kotlin.retrofit.v5.Main" />
+        <activity android:name=".kotlin.retrofit.v6.Main" />
 
         <activity android:name=".kotlin.retrofit.authorization.bearer.MainActivity" />
         <activity android:name=".kotlin.retrofit.authorization.bearer.MainActivity_v1" />
