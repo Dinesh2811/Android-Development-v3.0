@@ -81,10 +81,6 @@ android {
     }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.isIncremental = true
-}
-
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:1.8.0")
@@ -193,6 +189,7 @@ dependencies {
     ksp("androidx.hilt:hilt-compiler:1.0.0")
 
 }
+
 
 /*
 
