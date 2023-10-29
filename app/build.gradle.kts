@@ -88,32 +88,32 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.material:material:1.11.0-alpha03")
 
-    implementation("androidx.compose.material3:material3:1.2.0-alpha09")
-    implementation("androidx.compose.material3:material3-android:1.2.0-alpha09")
-    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha09")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha10")
+    implementation("androidx.compose.material3:material3-android:1.2.0-alpha10")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha10")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation(platform("androidx.compose:compose-bom:2023.10.00"))
-    implementation("androidx.compose.ui:ui:1.5.3")
-    implementation("androidx.compose.ui:ui-graphics:1.5.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
-    implementation("androidx.compose.foundation:foundation:1.5.3")
-    implementation("androidx.compose.ui:ui-geometry:1.5.3")
-    implementation("androidx.compose.foundation:foundation-layout:1.5.3")
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.3")
-    implementation("androidx.compose.animation:animation-core:1.5.3")
-    implementation("androidx.compose.animation:animation:1.5.3")
-    implementation("androidx.compose.ui:ui-text:1.5.3")
-    implementation("androidx.compose.ui:ui-util:1.5.3")
-    implementation("androidx.compose.ui:ui-viewbinding:1.5.3")
-    implementation("androidx.compose.material:material:1.5.3")
-    implementation("androidx.compose.material:material-icons-core:1.5.3")
-    implementation("androidx.compose.material:material-icons-extended:1.5.3")
+    implementation("androidx.compose.ui:ui:1.5.4")
+    implementation("androidx.compose.ui:ui-graphics:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+    implementation("androidx.compose.foundation:foundation:1.5.4")
+    implementation("androidx.compose.ui:ui-geometry:1.5.4")
+    implementation("androidx.compose.foundation:foundation-layout:1.5.4")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation("androidx.compose.animation:animation-core:1.5.4")
+    implementation("androidx.compose.animation:animation:1.5.4")
+    implementation("androidx.compose.ui:ui-text:1.5.4")
+    implementation("androidx.compose.ui:ui-util:1.5.4")
+    implementation("androidx.compose.ui:ui-viewbinding:1.5.4")
+    implementation("androidx.compose.material:material:1.5.4")
+    implementation("androidx.compose.material:material-icons-core:1.5.4")
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
 
     // androidTestImplementation
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
@@ -121,14 +121,14 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // debugImplementation
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
 
 
     //  Room components    	2.5.2   -->  2.6.0-alpha03
-    implementation("androidx.room:room-runtime:2.6.0-rc01")
-    ksp("androidx.room:room-compiler:2.6.0-rc01")
-    implementation("androidx.room:room-ktx:2.6.0-rc01")
+    implementation("androidx.room:room-runtime:2.6.0")
+    ksp("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
 
     //  ViewModel & LiveData
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")

@@ -9,5 +9,5 @@ plugins {
 
 
     //  id("org.jetbrains.kotlin.android") version "1.9.0" apply false  //        kotlinCompilerExtensionVersion = "1.5.1"
-    id("com.google.dagger.hilt.android") version "2.48" apply false
+    id("com.google.dagger.hilt.android") version "2.48.1" apply false
 }
