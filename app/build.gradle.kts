@@ -71,14 +71,15 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    signingConfigs {
-        getByName("debug") {
+//    signingConfigs {
+//        getByName("debug") {
 //            storeFile = file("../keystore/debug.keystore")
 //            storePassword = "android_storePassword"
 //            keyAlias = "android_debug_key"
 //            keyPassword = "android_keyPassword"
-        }
-    }
+//        }
+//    }
+
 }
 
 dependencies {
@@ -86,7 +87,7 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.material:material:1.11.0-alpha03")
+    implementation("com.google.android.material:material:1.11.0-beta01")
 
     implementation("androidx.compose.material3:material3:1.2.0-alpha10")
     implementation("androidx.compose.material3:material3-android:1.2.0-alpha10")
@@ -190,7 +191,6 @@ dependencies {
 
 }
 
-
 /*
 
 dependencies {
@@ -240,37 +240,42 @@ dependencies {
     androidTestImplementation(libs.bundles.android.test)
     debugImplementation(libs.bundles.debug)
     testImplementation(libs.bundles.test)
+
+    //  Dagger
+    implementation(libs.bundles.dagger)
+    ksp(libs.dagger.compiler)
+
+    //  Hilt
+    implementation(libs.bundles.hilt)
+    ksp(libs.bundles.hilt.compiler)
 }
 
  */
 
 /*
-libs.versions.toml
-
-
 [versions]
-agp = "8.1.1"
+agp = "8.1.2"
 kotlin = "1.9.10"
 
 core-ktx = "1.12.0"
-activity-compose = "1.7.2"
+activity-compose = "1.8.0"
 appcompat = "1.6.1"
 constraintlayout = "2.1.4"
-material = "1.11.0-alpha03"
+material = "1.11.0-beta01"
 
-material3 = "1.2.0-alpha08"
+material3 = "1.2.0-alpha10"
 kotlinx-coroutines = "1.7.3"
 
-compose-bom = "2023.09.01"
-ui = "1.5.1"
-compose-material = "1.5.1"
+compose-bom = "2023.10.01"
+ui = "1.5.4"
+compose-material = "1.5.4"
 
-ui-test-junit4 = "1.5.1"
+ui-test-junit4 = "1.5.4"
 test-junit = "1.1.5"
 espresso-core = "3.5.1"
 junit = "4.13.2"
 
-room = "2.6.0-rc01"  #   2.5.2   -->   2.6.0-alpha03
+room = "2.6.0"  #   2.5.2   -->   2.6.0-alpha03
 lifecycle = "2.6.2"
 glide = "4.16.0"
 retrofit = "2.9.0"
@@ -279,7 +284,7 @@ okhttp = "5.0.0-alpha.8"
 converter-gson = "2.9.0"
 gson = "2.10.1"
 
-navigation = "2.7.3"
+navigation = "2.7.4"
 lottie = "6.1.0"
 volley = "1.2.1"
 swiperefreshlayout = "1.1.0"
@@ -289,6 +294,11 @@ paging-runtime-ktx = "3.2.1"
 
 play-services-location = "21.0.1"
 shimmer = "0.5.0"
+
+dagger = "2.48.1"
+
+hilt-android = "2.48.1"
+hilt-compiler = "1.0.0"
 
 
 [libraries]
@@ -385,6 +395,18 @@ androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefre
 #  Volley
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 
+#  Dagger
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }
+
+#  Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compiler" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android" }
+hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-compiler" }
+
 
 
 [plugins]
@@ -417,5 +439,9 @@ android-test = ["androidx-ui-test-junit4", "androidx-espresso-core", "androidx-j
 debug = ["androidx-ui-tooling", "androidx-ui-test-manifest"]
 test = ["junit"]
 
+dagger = ["dagger", "dagger-android-support", "dagger-android"]
+
+hilt = ["hilt-android", "androidx-hilt-navigation-compose"]
+hilt-compiler = ["hilt-android-compiler", "hilt-compiler"]
 
  */
