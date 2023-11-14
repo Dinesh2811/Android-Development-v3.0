@@ -34,7 +34,6 @@
 #### 10. git diff: Shows the differences between your working directory and the repository.
 			git diff
 
-
 ## Gradle command
 			./gradlew publish
 			./gradlew publishToMavenLocal
