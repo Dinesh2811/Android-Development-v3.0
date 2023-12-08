@@ -116,6 +116,142 @@ class ApiRetryInterceptor(private val maxRetries: Int) : Interceptor {
 }
 
 
+/*
+
+
+object ApiClient {
+    private const val TAG = "ApiClient"
+    private const val TIMEOUT_SECONDS = 60L
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
+    }
+
+    private val customLoggingInterceptor = Interceptor { chain ->
+        val request: Request = chain.request()
+        val requestBuilder: Request.Builder = chain.request().newBuilder()
+        val startTime = System.currentTimeMillis()
+
+        // Log the request details
+        logRequestDetails(request)
+
+//        val uuid = UUID.randomUUID().toString()
+//        requestBuilder.header("correlation-id", uuid)
+//        Log.d(TAG, "UUID:: $uuid")
+//        Log.d(TAG, "Authorization:: Bearer $accessToken")
+
+        val response = chain.proceed(requestBuilder.build())
+
+        // Log the response details
+        logResponseDetails(response, startTime)
+        response
+    }
+
+    private val httpClient = OkHttpClient.Builder()
+        .callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .retryOnConnectionFailure(true)
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(customLoggingInterceptor)
+        .build()
+
+    private fun gsonBuilder(): Gson = GsonBuilder()
+//        .setLenient()
+//        .setPrettyPrinting()
+        .create()
+
+    private fun createRetrofit(baseUrl: String): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder()))
+            .build()
+    }
+
+    fun <T> getApiInterface(apiInterface: Class<T>, baseUrl: String = "http://10.0.2.2/"): T {
+        return createRetrofit(baseUrl).create(apiInterface)
+    }
+
+    inline fun <reified T> getApiInterface(baseUrl: String = "http://10.0.2.2/"): T {
+        return getApiInterface(T::class.java, baseUrl)
+    }
+
+    private fun logRequestDetails(request: Request) {
+        // Log request details as needed
+        Log.d(TAG, "Request URL: ${request.url}")
+        Log.d(TAG, "Request Method: ${request.method}")
+        Log.d(TAG, "Request Headers: ${request.headers}")
+
+        Log.d(TAG, "Request Headers: ...")
+        request.headers.forEach { (name, value) ->
+            Log.d(TAG, "$name: $value")
+        }
+
+        // Log Authorization header and token
+        request.header("Authorization")?.let {
+            Log.d(TAG, "Authorization Header in Request: $it")
+        }
+
+        // Log Request Body
+        request.body?.let { requestBody ->
+            Log.d(TAG, "Request Body: ${getRequestBody(requestBody)}")
+        }
+
+        // Log other details you need
+    }
+
+    private fun logResponseDetails(response: Response, startTime: Long) {
+        try {
+            val responseBodyString = response.peekBody(Long.MAX_VALUE).string()
+            Log.d(TAG, "Response Code: ${response.code}")
+            val elapsedTime = System.currentTimeMillis() - startTime
+            Log.d(TAG, "Response Headers: ...")
+            response.headers.forEach { (name, value) ->
+                Log.d(TAG, "$name: $value")
+            }
+
+//        // Log Authorization header from the response
+//        response.header("Authorization")?.let {
+//            Log.d(TAG, "Authorization Header in Response: $it")
+//        }
+
+            if (responseBodyString.length > 4000) {
+                val chunkSize = 4000
+                responseBodyString.chunked(chunkSize).forEach { chunk ->
+                    Log.d(TAG, chunk)
+                }
+            } else {
+                Log.d(TAG, responseBodyString)
+            }
+            Log.d(TAG, "Response Time: $elapsedTime ms")
+        } catch (e: Exception) {
+            Log.e(TAG, "logResponseDetails: ${e.message}", e)
+        }
+    }
+
+    private fun getRequestBody(requestBody: RequestBody): String {
+        val buffer = Buffer()
+        try {
+            requestBody.writeTo(buffer)
+            return buffer.readUtf8()
+        } catch (e: Exception) {
+            Log.e(TAG, "getRequestBody: Error reading request body -->  ${e.message}", e)
+        } finally {
+            buffer.close()
+        }
+        return ""
+    }
+
+}
+
+
+ */
+
 //object ApiClient {
 //    private const val BASE_URL = "http://10.0.2.2/"
 //

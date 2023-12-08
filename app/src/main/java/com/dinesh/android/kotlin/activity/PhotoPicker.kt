@@ -1,5 +1,7 @@
 package com.dinesh.android.kotlin.activity
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
@@ -17,6 +19,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import com.dinesh.android.app.ToolbarMain
+import java.io.File
 
 private val TAG = "log_" + PhotoPicker::class.java.name.split(PhotoPicker::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
@@ -24,9 +27,21 @@ class PhotoPicker : ToolbarMain() {
     private val pickImage = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
         if (uri != null) {
             Log.d(TAG, "uri --> ${uri}")
+            val file: File = convertUriToFile(uri)
+            Log.d(TAG, "File path --> ${file.absolutePath}")
         } else {
             Log.e(TAG, "Image URI is null")
         }
+    }
+
+    private fun convertUriToFile(uri: Uri): File {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = contentResolver.query(uri, projection, null, null, null)
+        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        cursor?.moveToFirst()
+        val filePath = cursor?.getString(columnIndex ?: 0) ?: ""
+        cursor?.close()
+        return File(filePath)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,4 +77,19 @@ class PhotoPicker : ToolbarMain() {
             Log.d(TAG, "No media selected")
         }
     }
+}
+
+class SelectMedia(activity: AppCompatActivity) {
+    private val pickImage = activity.registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
+        if (uri != null) {
+            Log.d(TAG, "uri --> ${uri}")
+        } else {
+            Log.e(TAG, "Image URI is null")
+        }
+    }
+
+    fun getFile() {
+        pickImage.launch(PickVisualMediaRequest())
+    }
+
 }

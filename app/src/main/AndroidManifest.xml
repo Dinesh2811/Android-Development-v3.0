@@ -154,6 +154,7 @@
 
         <!--        test     -->
         <activity android:name=".test.Testing" />
+        <activity android:name=".test.CurrentlyTesting" />
 
 
         <receiver

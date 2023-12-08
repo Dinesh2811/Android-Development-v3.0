@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="BlueDateTextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/holo_blue_light</item>
+    </style>
+
+    <style name="DefaultDateTextAppearance">
+        <!-- Set your default text and background color here -->
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+
     <style name="styleButton" parent="Widget.Material3.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

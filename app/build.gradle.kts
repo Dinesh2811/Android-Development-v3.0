@@ -14,6 +14,22 @@ android {
     compileSdk = 34
     compileSdkPreview = "UpsideDownCake"
 
+    signingConfigs {
+        create("release"){
+            storeFile = file("../dinesh28-release-key.jks")
+            storePassword = "dinesh28Android"
+            keyAlias = "dinesh28-key-alias"
+            keyPassword = "dinesh28Android"
+        }
+        getByName("debug") {
+            storeFile = file("../dinesh28-release-key.jks")
+            storePassword = "dinesh28Android"
+            keyAlias = "dinesh28-key-alias"
+            keyPassword = "dinesh28Android"
+        }
+    }
+
+
     defaultConfig {
         applicationId = "com.dinesh.android"
         minSdk = 24
@@ -25,12 +41,16 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        proguardFiles()
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+//            isMinifyEnabled = true
+//            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             testCoverage {
                 enableUnitTestCoverage = false
@@ -38,6 +58,7 @@ android {
             }
         }
         debug {
+            signingConfig = signingConfigs.getByName("debug")
 //            applicationIdSuffix = ".debug"
             isMinifyEnabled = false
             isShrinkResources = false

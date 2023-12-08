@@ -1,6 +1,10 @@
 package com.dinesh.android
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +19,7 @@ import com.dinesh.android.compose.state.view_model.v3.MyLayoutView
 import com.dinesh.android.kotlin.activity.location.PermissionCallback
 import com.dinesh.android.kotlin.activity.location.PermissionHandler
 import com.dinesh.android.ui.theme.Material3Theme
+import java.io.File
 
 private val TAG = "log_" + MainActivity::class.java.name.split(MainActivity::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
@@ -28,7 +33,9 @@ class MainActivity : AppCompatActivity(), PermissionCallback {
 //        Log.e(TAG, "classNameAsString: $classNameAsString")
 //        launchActivity(Class.forName(classNameAsString.toString()))
 
-        launchActivity(com.dinesh.android.root.RvMain::class.java)
+//        launchActivity(com.dinesh.android.root.RvMain::class.java)
+        launchActivity(com.dinesh.android.test.CurrentlyTesting::class.java)
+//        launchActivity(com.dinesh.android.kotlin.activity.PhotoPicker::class.java)
 //        launchActivity(com.dinesh.android.kotlin.activity.floating_window.v0.MainActivity::class.java)
 //        launchActivity(com.dinesh.android.kotlin.activity.location.MainActivity::class.java)
 //        launchActivity(com.dinesh.android.app.user_interface.CollapsingToolbar::class.java)
@@ -37,7 +44,42 @@ class MainActivity : AppCompatActivity(), PermissionCallback {
             MyLayoutView()
         }
         logColor()
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.i(TAG, "onBackPressed: ")
+        clearAppData(this)
+    }
+
+    fun clearAppData(context: Context) {
+        try {
+            // Clear cache
+            context.cacheDir.deleteRecursively()
+
+            // Clear app's internal storage
+            clearInternalStorage(context.filesDir)
+
+            // Clear external cache directory
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                context.externalCacheDirs.forEach { it?.deleteRecursively() }
+            } else {
+                val externalCacheDir = Environment.getExternalStorageDirectory().absolutePath +
+                        "/Android/data/" + context.packageName + "/cache/"
+                File(externalCacheDir).deleteRecursively()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun clearInternalStorage(dir: File) {
+        for (file in dir.listFiles() ?: arrayOf()) {
+            if (file.isDirectory) {
+                clearInternalStorage(file)
+            }
+            file.delete()
+        }
     }
 
     private lateinit var permissionHandler: PermissionHandler
