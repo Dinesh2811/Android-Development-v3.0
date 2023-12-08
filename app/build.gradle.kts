@@ -12,7 +12,7 @@ plugins {
 android {
     namespace = "com.dinesh.android"
     compileSdk = 34
-    compileSdkPreview = "UpsideDownCake"
+//    compileSdkPreview = "UpsideDownCake"
 
     signingConfigs {
         create("release"){
@@ -29,7 +29,6 @@ android {
         }
     }
 
-
     defaultConfig {
         applicationId = "com.dinesh.android"
         minSdk = 24
@@ -41,16 +40,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        proguardFiles()
     }
 
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-//            isMinifyEnabled = true
-//            isShrinkResources = true
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             testCoverage {
                 enableUnitTestCoverage = false
@@ -69,6 +65,25 @@ android {
         }
     }
 
+    /*
+    flavorDimensions.add("versions")
+
+    productFlavors {
+        create("freeVersion") {     //  if (BuildConfig.FLAVOR == "freeVersion")
+            dimension = "versions"
+            applicationIdSuffix = ".free"
+//            applicationId = "com.dinesh.free"
+//            versionNameSuffix = "-free"
+        }
+        create("paidVersion") {
+            dimension = "versions"
+            applicationIdSuffix = ".paid"
+//            applicationId = "com.dinesh.paid"
+//            versionNameSuffix = "-paid"
+        }
+    }
+    */
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -85,7 +100,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
+        kotlinCompilerExtensionVersion = "1.5.6"
     }
     packaging {
         resources {
@@ -111,50 +126,43 @@ android {
         checkDependencies = true
     }
 
-//    signingConfigs {
-//        getByName("debug") {
-//            storeFile = file("../keystore/debug.keystore")
-//            storePassword = "android_storePassword"
-//            keyAlias = "android_debug_key"
-//            keyPassword = "android_keyPassword"
-//        }
-//    }
-
 }
 
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.activity:activity-compose:1.8.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.material:material:1.11.0-beta01")
 
-    implementation("androidx.compose.material3:material3:1.2.0-alpha10")
-    implementation("androidx.compose.material3:material3-android:1.2.0-alpha10")
-    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha10")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha12")
+    implementation("androidx.compose.material3:material3-android:1.2.0-alpha12")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha12")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+//    val composeVersion = "1.5.4"
+    val composeVersion = "1.6.0-beta02"
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    implementation("androidx.compose.ui:ui:1.5.4")
-    implementation("androidx.compose.ui:ui-graphics:1.5.4")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
-    implementation("androidx.compose.foundation:foundation:1.5.4")
-    implementation("androidx.compose.ui:ui-geometry:1.5.4")
-    implementation("androidx.compose.foundation:foundation-layout:1.5.4")
-    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
-    implementation("androidx.compose.animation:animation-core:1.5.4")
-    implementation("androidx.compose.animation:animation:1.5.4")
-    implementation("androidx.compose.ui:ui-text:1.5.4")
-    implementation("androidx.compose.ui:ui-util:1.5.4")
-    implementation("androidx.compose.ui:ui-viewbinding:1.5.4")
-    implementation("androidx.compose.material:material:1.5.4")
-    implementation("androidx.compose.material:material-icons-core:1.5.4")
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.ui:ui-graphics:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
+    implementation("androidx.compose.foundation:foundation:$composeVersion")
+    implementation("androidx.compose.ui:ui-geometry:$composeVersion")
+    implementation("androidx.compose.foundation:foundation-layout:$composeVersion")
+    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+    implementation("androidx.compose.animation:animation-core:$composeVersion")
+    implementation("androidx.compose.animation:animation:$composeVersion")
+    implementation("androidx.compose.ui:ui-text:$composeVersion")
+    implementation("androidx.compose.ui:ui-util:$composeVersion")
+    implementation("androidx.compose.ui:ui-viewbinding:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material-icons-core:$composeVersion")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
 
     // androidTestImplementation
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
@@ -162,14 +170,14 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // debugImplementation
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
 
 
     //  Room components    	2.5.2   -->  2.6.0-alpha03
-    implementation("androidx.room:room-runtime:2.6.0")
-    ksp("androidx.room:room-compiler:2.6.0")
-    implementation("androidx.room:room-ktx:2.6.0")
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 
     //  ViewModel & LiveData
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -192,8 +200,8 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1") // Used to convert Java Object into JSON representation
 
     // HTTP
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.8")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.8")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
 
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
@@ -205,7 +213,7 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
     // Animation
-    implementation("com.airbnb.android:lottie:6.1.0")   // Lottie
+    implementation("com.airbnb.android:lottie:6.2.0")   // Lottie
     implementation("com.facebook.shimmer:shimmer:0.5.0")    //  Shimmer
 
     // Location Services
@@ -218,18 +226,19 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
 
     //  Dagger
-    implementation("com.google.dagger:dagger:2.48.1")
-    implementation("com.google.dagger:dagger-android:2.48.1")
-    implementation("com.google.dagger:dagger-android-support:2.48.1")
-    ksp("com.google.dagger:dagger-compiler:2.48.1")
+    implementation("com.google.dagger:dagger:2.49")
+    implementation("com.google.dagger:dagger-android:2.49")
+    implementation("com.google.dagger:dagger-android-support:2.49")
+    ksp("com.google.dagger:dagger-compiler:2.49")
 
     //  Hilt
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-    implementation("com.google.dagger:hilt-android:2.48.1")
-    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    implementation("com.google.dagger:hilt-android:2.49")
+    ksp("com.google.dagger:hilt-android-compiler:2.49")
     ksp("androidx.hilt:hilt-compiler:1.1.0")
 
 }
+
 
 /*
 
