@@ -84,13 +84,13 @@ android {
     }
     */
 
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_17
-//        targetCompatibility = JavaVersion.VERSION_17
-//    }
-//    kotlinOptions {
-//        jvmTarget = JavaVersion.VERSION_17.toString()
-//    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
     kotlin {
         jvmToolchain(17)
     }
@@ -130,21 +130,21 @@ android {
 
 dependencies {
 //    implementation("androidx.work.work-runtime-ktx:2.9.0")
-    
+
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-compose:1.8.1")
+    implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.material:material:1.11.0-beta01")
+    implementation("com.google.android.material:material:1.11.0")
 
-    implementation("androidx.compose.material3:material3:1.2.0-alpha12")
-    implementation("androidx.compose.material3:material3-android:1.2.0-alpha12")
-    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha12")
+    implementation("androidx.compose.material3:material3:1.2.0-beta01")
+    implementation("androidx.compose.material3:material3-android:1.2.0-beta01")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-beta01")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
 //    val composeVersion = "1.5.4"
-    val composeVersion = "1.6.0-beta02"
+    val composeVersion = "1.6.0-beta03"
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-graphics:$composeVersion")
@@ -202,13 +202,13 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1") // Used to convert Java Object into JSON representation
 
     // HTTP
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.12")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
 
     // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-compose:2.7.5")  // Navigation Compose
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-compose:2.7.6")  // Navigation Compose
 
     // Paging
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
@@ -228,15 +228,15 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
 
     //  Dagger
-    implementation("com.google.dagger:dagger:2.49")
-    implementation("com.google.dagger:dagger-android:2.49")
-    implementation("com.google.dagger:dagger-android-support:2.49")
-    ksp("com.google.dagger:dagger-compiler:2.49")
+    implementation("com.google.dagger:dagger:2.50")
+    implementation("com.google.dagger:dagger-android:2.50")
+    implementation("com.google.dagger:dagger-android-support:2.50")
+    ksp("com.google.dagger:dagger-compiler:2.50")
 
     //  Hilt
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
-    implementation("com.google.dagger:hilt-android:2.49")
-    ksp("com.google.dagger:hilt-android-compiler:2.49")
+    implementation("com.google.dagger:hilt-android:2.50")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
     ksp("androidx.hilt:hilt-compiler:1.1.0")
 
 }
