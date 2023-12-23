@@ -310,7 +310,6 @@ object ApiClient_FullHilt {
         // Log other details you need
     }
 
-
     private fun logResponseDetails(response: Response, startTime: Long) {
         try {
             val responseBodyString = response.peekBody(Long.MAX_VALUE).string()
