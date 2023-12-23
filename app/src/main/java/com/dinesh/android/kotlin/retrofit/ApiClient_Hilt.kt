@@ -28,10 +28,19 @@ import javax.net.ssl.X509TrustManager
 @Module
 @InstallIn(SingletonComponent::class)
 object ApiClient_Hilt {
-    private const val TAG = "log_ApiClient"
+    private const val TAG = "ApiClient"
     private const val BASE_URL = "https://sandbox.plaid.com"    //  "http://10.0.2.2/"
     private const val TIMEOUT_SECONDS = 60L
     private const val RETRY_COUNT = 3
+    private val loggingInterceptor = HttpLoggingInterceptor { message ->
+        Log.d("log_info", message)
+    }.apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
+    }
 
 //    @Singleton
 //    @Provides
@@ -52,10 +61,7 @@ object ApiClient_Hilt {
 
     @Singleton
     @Provides
-    fun providesOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        customLoggingInterceptor: Interceptor
-    ): OkHttpClient {
+    fun providesOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -75,48 +81,30 @@ object ApiClient_Hilt {
     fun providesGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create(
             GsonBuilder()
-                .setLenient()
-                .setPrettyPrinting()
+//                .setLenient()
+//                .setPrettyPrinting()
                 .create()
         )
     }
 
-    @Singleton
-    @Provides
-    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor { message ->
-            Log.d(TAG, message)
-        }.apply {
-            level = if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
-        }
-    }
+    private val customLoggingInterceptor = Interceptor { chain ->
+        val request: Request = chain.request()
+        val requestBuilder: Request.Builder = chain.request().newBuilder()
+        val startTime = System.currentTimeMillis()
 
-    @Singleton
-    @Provides
-    fun providesInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            val request: Request = chain.request()
-            val requestBuilder: Request.Builder = chain.request().newBuilder()
-            val startTime = System.currentTimeMillis()
+        // Log the request details
+        logRequestDetails(request)
 
-            // Log the request details
-            logRequestDetails(request)
+//        val uuid = UUID.randomUUID().toString()
+//        requestBuilder.header("correlation-id", uuid)
+//        Log.d(TAG, "UUID:: $uuid")
+//        Log.d(TAG, "Authorization:: Bearer $accessToken")
 
-//            val uuid = UUID.randomUUID().toString()
-//            requestBuilder.header("correlation-id", uuid)
-//            Log.d(TAG, "UUID:: $uuid")
-//            Log.d(TAG, "Authorization:: Bearer $accessToken")
+        val response = chain.proceed(requestBuilder.build())
 
-            val response = chain.proceed(requestBuilder.build())
-
-            // Log the response details
-            logResponseDetails(response, startTime)
-            response
-        }
+        // Log the response details
+        logResponseDetails(response, startTime)
+        response
     }
 
     private fun logRequestDetails(request: Request) {
@@ -206,10 +194,23 @@ object ApiClient_Hilt {
 @Module
 @InstallIn(SingletonComponent::class)
 object ApiClient_FullHilt {
-    private const val TAG = "log_ApiClient"
+    private const val TAG = "ApiClient"
     private const val BASE_URL = "https://jsonplaceholder.typicode.com"    //  "http://10.0.2.2/"
     private const val TIMEOUT_SECONDS = 60L
     private const val RETRY_COUNT = 3
+    @Singleton
+    @Provides
+    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor { message ->
+            Log.i("log_info", message)
+        }.apply {
+            level = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+    }
 
 //    @Singleton
 //    @Provides
@@ -259,20 +260,6 @@ object ApiClient_FullHilt {
                 .setPrettyPrinting()
                 .create()
         )
-    }
-
-    @Singleton
-    @Provides
-    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor { message ->
-            Log.i("log_info", message)
-        }.apply {
-            level = if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
-        }
     }
 
     @Singleton

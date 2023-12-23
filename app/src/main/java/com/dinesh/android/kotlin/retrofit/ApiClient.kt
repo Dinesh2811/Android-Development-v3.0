@@ -1,9 +1,8 @@
 package com.dinesh.android.kotlin.retrofit
 
-import android.content.Context
 import android.util.Log
 import com.dinesh.android.BuildConfig
-import okhttp3.Cache
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -14,25 +13,22 @@ import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import okio.Buffer
-import okio.IOException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
 import java.security.SecureRandom
+import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
-import java.security.cert.X509Certificate
-import kotlin.coroutines.coroutineContext
 
 object ApiClient {
-    private const val TAG = "log_ApiClient"
+    private const val TAG = "ApiClient"
     //    private const val BASE_URL = "http://10.0.2.2/"   http://192.168.1.5:3000/api/customers
     private const val TIMEOUT_SECONDS = 60L
     private const val RETRY_COUNT = 3
     private val loggingInterceptor = HttpLoggingInterceptor { message ->
-//        Log.d(TAG, message)
+//        Log.d("log_info", message)
     }.apply {
         level = if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor.Level.BODY
@@ -61,6 +57,22 @@ object ApiClient {
         response
     }
 
+    private val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+        override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+        }
+
+        override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+        }
+
+        override fun getAcceptedIssuers(): Array<X509Certificate> {
+            return emptyArray()
+        }
+    })
+
+    private val sslContext = SSLContext.getInstance("TLS").apply {
+        init(null, trustAllCerts, SecureRandom())
+    }
+
     private val httpClient = OkHttpClient.Builder()
         .callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -78,9 +90,16 @@ object ApiClient {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(httpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(gsonConverterFactory)
             .build()
     }
+
+    private val gsonConverterFactory = GsonConverterFactory.create(
+        GsonBuilder()
+//            .setLenient()
+//            .setPrettyPrinting()
+            .create()
+    )
 
 //    fun getApiInterface(baseUrl: String = "http://10.0.2.2/"): ApiInterface {
 //        return createRetrofit(baseUrl).create(ApiInterface::class.java)
@@ -159,22 +178,6 @@ object ApiClient {
         return ""
     }
 
-
-    private val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-        override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-        }
-
-        override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-        }
-
-        override fun getAcceptedIssuers(): Array<X509Certificate> {
-            return emptyArray()
-        }
-    })
-
-    private val sslContext = SSLContext.getInstance("TLS").apply {
-        init(null, trustAllCerts, SecureRandom())
-    }
 }
 
 
