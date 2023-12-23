@@ -273,10 +273,9 @@ object ApiClient_FullHilt {
         }
     }
 
-
     @Singleton
     @Provides
-    fun providesInterceptor(logRequestDetails: (Request) -> Unit): Interceptor {
+    fun providesInterceptor(logRequestDetails: (Request) -> Unit, logResponseDetails: (Response, Long) -> Unit): Interceptor {
         return Interceptor { chain ->
             val request: Request = chain.request()
             val requestBuilder: Request.Builder = chain.request().newBuilder()
@@ -325,7 +324,11 @@ object ApiClient_FullHilt {
         // Log other details you need
     }
 
-    private fun logResponseDetails(response: Response, startTime: Long) {
+//    private fun logResponseDetails(response: Response, startTime: Long) {
+
+    @Singleton
+    @Provides
+    fun providesLogResponseDetails(): (Response, Long) -> Unit = { response, startTime ->
         try {
             val responseBodyString = response.peekBody(Long.MAX_VALUE).string()
             Log.d(TAG, "Response Code: ${response.code}")
