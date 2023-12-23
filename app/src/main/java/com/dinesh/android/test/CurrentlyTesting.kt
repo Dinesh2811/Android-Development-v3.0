@@ -17,16 +17,32 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.*
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.launch
+import retrofit2.Retrofit
 import java.util.Calendar
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
 private val TAG = "log_" + CurrentlyTesting::class.java.name.split(CurrentlyTesting::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
-
+@AndroidEntryPoint
 class CurrentlyTesting : AppCompatActivity() {
+
+    @Inject
+    @Named("ApiService2")
+    lateinit var apiService : ReturnType
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.currently_testing)
+
+        Log.i(TAG, "onCreate: ${apiService}")
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
         val currentDate = Calendar.getInstance()
@@ -52,3 +68,37 @@ class CurrentlyTesting : AppCompatActivity() {
     }
 }
 
+
+data class Model(val data: String)
+data class ReturnType(val returnValue: String, val data: String)
+
+
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+
+    @Singleton
+    @Provides
+    @Named("Retrofit1")
+    fun providesRetrofit1() : Model {
+        return Model("First")
+    }
+    @Singleton
+    @Provides
+    @Named("Retrofit2")
+    fun providesRetrofit2() : Model {
+        return Model("Second")
+    }
+    @Singleton
+    @Provides
+    @Named("ApiService1")
+    fun providesApiService1(@Named("Retrofit1") model : Model): ReturnType {
+        return ReturnType("providesApiService1", model.data)
+    }
+    @Singleton
+    @Provides
+    @Named("ApiService2")
+    fun providesApiService2(@Named("Retrofit2") model : Model): ReturnType {
+        return ReturnType("providesApiService2", model.data)
+    }
+}

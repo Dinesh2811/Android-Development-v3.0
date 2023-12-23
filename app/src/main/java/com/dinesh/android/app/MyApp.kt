@@ -6,7 +6,9 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.dinesh.android.app.user_interface.notification.services.CounterNotificationService
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MyApp : Application() {
 
     override fun onCreate() {

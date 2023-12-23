@@ -1,13 +1,15 @@
 package com.dinesh.android.kotlin
 
-import android.app.Activity
 import android.view.View
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.CalendarView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import com.dinesh.android.R
 import com.dinesh.android.databinding.BasicViewBinding
+import java.util.Calendar
 
 private val TAG = "log_" + Main::class.java.name.split(Main::class.java.name.split(".").toTypedArray()[2] + ".").toTypedArray()[1]
 
@@ -21,6 +23,10 @@ class Main : AppCompatActivity() {
         
         binding.backButton.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
+
+        calendarView()
+
     }
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -54,4 +60,28 @@ class Main : AppCompatActivity() {
     }
 
      */
+
+
+    private fun calendarView() {
+        val calendarView = findViewById<CalendarView>(R.id.calendarView)
+        val currentDate = Calendar.getInstance()
+
+        val targetDate = Calendar.getInstance()
+        targetDate.set(2023, Calendar.NOVEMBER, 30)
+
+        if (currentDate == targetDate) {
+            calendarView.dateTextAppearance = R.style.BlueDateTextAppearance
+        }
+
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, month, dayOfMonth)
+
+            if (selectedDate == targetDate) {
+                calendarView.dateTextAppearance = R.style.BlueDateTextAppearance
+            } else {
+                calendarView.dateTextAppearance = R.style.DefaultDateTextAppearance
+            }
+        }
+    }
 }

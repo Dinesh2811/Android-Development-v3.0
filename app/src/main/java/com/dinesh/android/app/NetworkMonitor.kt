@@ -3,6 +3,7 @@ package com.dinesh.android.app
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
+import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,6 +48,10 @@ override fun onStop() {
 
  */
 
+interface ConnectionManager {
+    fun isNetworkAvailable(): Boolean
+    fun registerNetworkCallBack()
+}
 object NetworkMonitor {
     private const val TAG = "log_NetworkMonitor"
     private var connectivityManager: ConnectivityManager? = null
@@ -78,6 +83,33 @@ object NetworkMonitor {
         }
     }
 
+//    fun isNetworkAvailable(): Boolean {
+//        val network = connectivityManager?.activeNetwork ?: return false
+//        val networkCapabilities = connectivityManager?.getNetworkCapabilities(network) ?: return false
+//        return when {
+//            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+//            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+//            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+//            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
+//            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_USB) -> true
+//            else -> false
+//        }
+//    }
+
+    fun getNetworkType(): NetworkType {
+        val network = connectivityManager?.activeNetwork ?: return NetworkType.Unknown
+        val networkCapabilities = connectivityManager?.getNetworkCapabilities(network) ?: return NetworkType.Unknown
+
+        return when {
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> NetworkType.Wifi
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> NetworkType.Cellular
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> NetworkType.Ethernet
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> NetworkType.Bluetooth
+            networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_USB) -> NetworkType.Usb
+            else -> NetworkType.Unknown
+        }
+    }
+
     fun start(context: Context) {
         connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkRequest = NetworkRequest.Builder().build()
@@ -89,3 +121,11 @@ object NetworkMonitor {
     }
 }
 
+sealed class NetworkType {
+    data object Wifi : NetworkType()
+    data object Cellular : NetworkType()
+    data object Ethernet : NetworkType()
+    data object Bluetooth : NetworkType()
+    data object Usb : NetworkType()
+    data object Unknown : NetworkType()
+}
