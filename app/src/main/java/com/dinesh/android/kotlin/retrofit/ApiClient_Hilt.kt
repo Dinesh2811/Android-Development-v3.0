@@ -232,7 +232,9 @@ object ApiClient_FullHilt {
     @Provides
     fun providesOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        customLoggingInterceptor: Interceptor
+        customLoggingInterceptor: Interceptor,
+        sslContext: SSLContext,
+        trustAllCerts: Array<TrustManager>
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -275,7 +277,9 @@ object ApiClient_FullHilt {
 
     @Singleton
     @Provides
-    fun providesInterceptor(logRequestDetails: (Request) -> Unit, logResponseDetails: (Response, Long) -> Unit): Interceptor {
+    fun providesInterceptor(
+        logRequestDetails: (Request) -> Unit,
+        logResponseDetails: (Response, Long) -> Unit): Interceptor {
         return Interceptor { chain ->
             val request: Request = chain.request()
             val requestBuilder: Request.Builder = chain.request().newBuilder()
@@ -296,7 +300,6 @@ object ApiClient_FullHilt {
             response
         }
     }
-
 
     @Singleton
     @Provides
@@ -323,8 +326,6 @@ object ApiClient_FullHilt {
 
         // Log other details you need
     }
-
-//    private fun logResponseDetails(response: Response, startTime: Long) {
 
     @Singleton
     @Provides
@@ -357,7 +358,6 @@ object ApiClient_FullHilt {
         }
     }
 
-
     @Singleton
     @Provides
     fun providesGetRequestBody(): (RequestBody) -> String = { requestBody ->
@@ -373,7 +373,9 @@ object ApiClient_FullHilt {
         }
     }
 
-    private val trustAllCerts = arrayOf<TrustManager>(object: X509TrustManager {
+    @Singleton
+    @Provides
+    fun providesTrustAllCerts(): Array<TrustManager> = arrayOf(object: X509TrustManager {
         override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
         }
 
@@ -385,7 +387,10 @@ object ApiClient_FullHilt {
         }
     })
 
-    private val sslContext = SSLContext.getInstance("TLS").apply {
+    @Singleton
+    @Provides
+    fun providesSslContext(trustAllCerts: Array<TrustManager>): SSLContext = SSLContext.getInstance("TLS").apply {
         init(null, trustAllCerts, SecureRandom())
     }
+
 }
