@@ -5,12 +5,5 @@
     android:layout_height="match_parent">
 
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:dateTextAppearance="@style/DefaultDateTextAppearance"
-        android:showWeekNumber="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.dinesh.android.kotlin.retrofit
 
 import android.content.Context
 import android.util.Log
+import com.dinesh.android.BuildConfig
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -24,27 +25,18 @@ import kotlin.coroutines.coroutineContext
 
 object ApiClient {
     //    private const val BASE_URL = "http://10.0.2.2/"   http://192.168.1.5:3000/api/customers
-    private const val TIMEOUT_SECONDS = 30L
+    private const val TIMEOUT_SECONDS = 60L
     private const val RETRY_COUNT = 3
-    private val loggingInterceptor = HttpLoggingInterceptor {
-//            message -> Log.d("log_ApiClient", message)
-    }.apply { level = HttpLoggingInterceptor.Level.BODY }
-
-    private val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-        override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+    private val loggingInterceptor = HttpLoggingInterceptor { message ->
+//        Log.d("log_ApiClient", message)
+    }.apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
         }
-
-        override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-        }
-
-        override fun getAcceptedIssuers(): Array<X509Certificate> {
-            return emptyArray()
-        }
-    })
-
-    private val sslContext = SSLContext.getInstance("TLS").apply {
-        init(null, trustAllCerts, SecureRandom())
     }
+
 
     private val httpClient = OkHttpClient.Builder()
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -77,6 +69,21 @@ object ApiClient {
         return getApiInterface(T::class.java, baseUrl)
     }
 
+    private val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+        override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+        }
+
+        override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+        }
+
+        override fun getAcceptedIssuers(): Array<X509Certificate> {
+            return emptyArray()
+        }
+    })
+
+    private val sslContext = SSLContext.getInstance("TLS").apply {
+        init(null, trustAllCerts, SecureRandom())
+    }
 }
 
 

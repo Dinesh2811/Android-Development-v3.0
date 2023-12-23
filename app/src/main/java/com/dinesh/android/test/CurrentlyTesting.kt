@@ -33,72 +33,10 @@ private val TAG = "log_" + CurrentlyTesting::class.java.name.split(CurrentlyTest
 @AndroidEntryPoint
 class CurrentlyTesting : AppCompatActivity() {
 
-    @Inject
-    @Named("ApiService2")
-    lateinit var apiService : ReturnType
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.currently_testing)
 
-        Log.i(TAG, "onCreate: ${apiService}")
 
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        val currentDate = Calendar.getInstance()
-
-        val targetDate = Calendar.getInstance()
-        targetDate.set(2023, Calendar.NOVEMBER, 30)
-
-        if (currentDate == targetDate) {
-            calendarView.dateTextAppearance = R.style.BlueDateTextAppearance
-        }
-
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val selectedDate = Calendar.getInstance()
-            selectedDate.set(year, month, dayOfMonth)
-
-            if (selectedDate == targetDate) {
-                calendarView.dateTextAppearance = R.style.BlueDateTextAppearance
-            } else {
-                calendarView.dateTextAppearance = R.style.DefaultDateTextAppearance
-            }
-        }
-
-    }
-}
-
-
-data class Model(val data: String)
-data class ReturnType(val returnValue: String, val data: String)
-
-
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
-
-    @Singleton
-    @Provides
-    @Named("Retrofit1")
-    fun providesRetrofit1() : Model {
-        return Model("First")
-    }
-    @Singleton
-    @Provides
-    @Named("Retrofit2")
-    fun providesRetrofit2() : Model {
-        return Model("Second")
-    }
-    @Singleton
-    @Provides
-    @Named("ApiService1")
-    fun providesApiService1(@Named("Retrofit1") model : Model): ReturnType {
-        return ReturnType("providesApiService1", model.data)
-    }
-    @Singleton
-    @Provides
-    @Named("ApiService2")
-    fun providesApiService2(@Named("Retrofit2") model : Model): ReturnType {
-        return ReturnType("providesApiService2", model.data)
     }
 }
