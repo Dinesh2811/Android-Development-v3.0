@@ -207,7 +207,7 @@ object ApiClient_Hilt {
 @InstallIn(SingletonComponent::class)
 object ApiClient_FullHilt {
     private const val TAG = "log_ApiClient"
-    private const val BASE_URL = "https://sandbox.plaid.com"    //  "http://10.0.2.2/"
+    private const val BASE_URL = "https://jsonplaceholder.typicode.com"    //  "http://10.0.2.2/"
     private const val TIMEOUT_SECONDS = 60L
     private const val RETRY_COUNT = 3
 
@@ -246,7 +246,7 @@ object ApiClient_FullHilt {
             .addInterceptor(customLoggingInterceptor)
 //            .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
 //            .hostnameVerifier { _, _ -> true }
-            .addInterceptor(ApiRetryInterceptor(RETRY_COUNT))
+//            .addInterceptor(ApiRetryInterceptor(RETRY_COUNT))
             .build()
     }
 
@@ -265,7 +265,7 @@ object ApiClient_FullHilt {
     @Provides
     fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor { message ->
-            Log.d(TAG, message)
+            Log.i("log_info", message)
         }.apply {
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
@@ -277,9 +277,7 @@ object ApiClient_FullHilt {
 
     @Singleton
     @Provides
-    fun providesInterceptor(
-        logRequestDetails: (Request) -> Unit,
-        logResponseDetails: (Response, Long) -> Unit): Interceptor {
+    fun providesInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request: Request = chain.request()
             val requestBuilder: Request.Builder = chain.request().newBuilder()
@@ -301,9 +299,7 @@ object ApiClient_FullHilt {
         }
     }
 
-    @Singleton
-    @Provides
-    fun providesLogRequestDetails(getRequestBody: (RequestBody) -> String): (Request) -> Unit = { request ->
+    private fun logRequestDetails(request: Request) {
         // Log request details as needed
         Log.d(TAG, "Request URL: ${request.url}")
         Log.d(TAG, "Request Method: ${request.method}")
@@ -327,9 +323,8 @@ object ApiClient_FullHilt {
         // Log other details you need
     }
 
-    @Singleton
-    @Provides
-    fun providesLogResponseDetails(): (Response, Long) -> Unit = { response, startTime ->
+
+    private fun logResponseDetails(response: Response, startTime: Long) {
         try {
             val responseBodyString = response.peekBody(Long.MAX_VALUE).string()
             Log.d(TAG, "Response Code: ${response.code}")
@@ -339,10 +334,10 @@ object ApiClient_FullHilt {
                 Log.d(TAG, "$name: $value")
             }
 
-//            // Log Authorization header from the response
-//            response.header("Authorization")?.let {
-//                Log.d(TAG, "Authorization Header in Response: $it")
-//            }
+            // Log Authorization header from the response
+            response.header("Authorization")?.let {
+                Log.d(TAG, "Authorization Header in Response: $it")
+            }
 
             if (responseBodyString.length > 4000) {
                 val chunkSize = 4000
@@ -358,19 +353,17 @@ object ApiClient_FullHilt {
         }
     }
 
-    @Singleton
-    @Provides
-    fun providesGetRequestBody(): (RequestBody) -> String = { requestBody ->
+    private fun getRequestBody(requestBody: RequestBody): String {
         val buffer = Buffer()
         try {
             requestBody.writeTo(buffer)
-            buffer.readUtf8()
+            return buffer.readUtf8()
         } catch (e: Exception) {
             Log.e(TAG, "getRequestBody: Error reading request body -->  ${e.message}", e)
-            ""
         } finally {
             buffer.close()
         }
+        return ""
     }
 
     @Singleton
