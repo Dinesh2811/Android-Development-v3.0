@@ -65,35 +65,32 @@ android {
         }
     }
 
-    /*
-    flavorDimensions.add("versions")
-
-    productFlavors {
-        create("freeVersion") {     //  if (BuildConfig.FLAVOR == "freeVersion")
-            dimension = "versions"
-            applicationIdSuffix = ".free"
-//            applicationId = "com.dinesh.free"
-//            versionNameSuffix = "-free"
-        }
-        create("paidVersion") {
-            dimension = "versions"
-            applicationIdSuffix = ".paid"
-//            applicationId = "com.dinesh.paid"
-//            versionNameSuffix = "-paid"
-        }
-    }
-    */
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-//    kotlin {
-//        jvmToolchain(17)
+//    flavorDimensions.add("versions")
+//    productFlavors {
+//        create("freeVersion") {     //  if (BuildConfig.FLAVOR == "freeVersion")
+//            dimension = "versions"
+//            applicationIdSuffix = ".free"
+////            applicationId = "com.dinesh.free"
+////            versionNameSuffix = "-free"
+//        }
+//        create("paidVersion") {
+//            dimension = "versions"
+//            applicationIdSuffix = ".paid"
+////            applicationId = "com.dinesh.paid"
+////            versionNameSuffix = "-paid"
+//        }
 //    }
+
+//    compileOptions {
+//        sourceCompatibility = JavaVersion.VERSION_17
+//        targetCompatibility = JavaVersion.VERSION_17
+//    }
+//    kotlinOptions {
+//        jvmTarget = JavaVersion.VERSION_17.toString()
+//    }
+    kotlin {
+        jvmToolchain(17)
+    }
     buildFeatures {
         buildConfig = true
         viewBinding = true

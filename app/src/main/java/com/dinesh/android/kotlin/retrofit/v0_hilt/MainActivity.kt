@@ -1,5 +1,8 @@
 package com.dinesh.android.kotlin.retrofit.v0_hilt
 
+
+/*
+
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -32,8 +35,6 @@ import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
-
-/*
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
