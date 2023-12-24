@@ -1,6 +1,8 @@
 plugins {
-//    alias(libs.plugins.androidApplication)
+//    alias(libs.plugins.application)
 //    alias(libs.plugins.kotlinAndroid)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.hiltAndroid)
 
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -97,7 +99,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.6"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -126,8 +128,6 @@ android {
 }
 
 dependencies {
-//    implementation("androidx.work.work-runtime-ktx:2.9.0")
-
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:1.8.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -202,6 +202,10 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.12")
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
 
+    // Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
@@ -236,6 +240,8 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.50")
     ksp("androidx.hilt:hilt-compiler:1.1.0")
 
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 }
 
 
@@ -267,6 +273,10 @@ dependencies {
     // HTTP
     implementation(libs.bundles.okhttp)
 
+    // Chucker
+    debugImplementation(libs.chucker.debug)
+    releaseImplementation(libs.chucker.release)
+
     // Navigation Component
     implementation(libs.bundles.navigation)
 
@@ -296,44 +306,49 @@ dependencies {
     //  Hilt
     implementation(libs.bundles.hilt)
     ksp(libs.bundles.hilt.compiler)
+
+    // WorkManager
+    implementation(libs.work.manager)
 }
 
  */
 
 /*
 [versions]
-agp = "8.1.2"
-kotlin = "1.9.10"
+agp = "8.2.0"
+kotlin = "1.9.22"
+ksp = "1.9.21-1.0.16"
+hilt = "2.50"
 
 core-ktx = "1.12.0"
-activity-compose = "1.8.0"
+activity-compose = "1.8.2"
 appcompat = "1.6.1"
 constraintlayout = "2.1.4"
-material = "1.11.0-beta01"
+material = "1.11.0"
 
-material3 = "1.2.0-alpha10"
+material3 = "1.2.0-beta01"
 kotlinx-coroutines = "1.7.3"
 
 compose-bom = "2023.10.01"
-ui = "1.5.4"
-compose-material = "1.5.4"
+#compose = "1.5.4"
+compose = "1.6.0-beta03"
 
-ui-test-junit4 = "1.5.4"
 test-junit = "1.1.5"
 espresso-core = "3.5.1"
 junit = "4.13.2"
 
-room = "2.6.0"  #   2.5.2   -->   2.6.0-alpha03
+room = "2.6.1"
 lifecycle = "2.6.2"
 glide = "4.16.0"
 retrofit = "2.9.0"
-okhttp = "5.0.0-alpha.8"
+okhttp = "5.0.0-alpha.12"
+chucker = "4.0.0"
 
 converter-gson = "2.9.0"
 gson = "2.10.1"
 
-navigation = "2.7.4"
-lottie = "6.1.0"
+navigation = "2.7.6"
+lottie = "6.2.0"
 volley = "1.2.1"
 swiperefreshlayout = "1.1.0"
 
@@ -343,10 +358,12 @@ paging-runtime-ktx = "3.2.1"
 play-services-location = "21.0.1"
 shimmer = "0.5.0"
 
-dagger = "2.48.1"
+dagger = "2.50"
 
-hilt-android = "2.48.1"
-hilt-compiler = "1.0.0"
+hilt-android = "2.50"
+hilt-compiler = "1.1.0"
+
+work-manager = "2.9.0"
 
 
 [libraries]
@@ -364,24 +381,24 @@ androidx-material3-window-size = { module = "androidx.compose.material3:material
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
-androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
-androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "ui" }
-androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui" }
-androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "ui" }
-androidx-ui-geometry = { module = "androidx.compose.ui:ui-geometry", version.ref = "ui" }
-androidx-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "ui" }
-androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "ui" }
-androidx-animation-core = { module = "androidx.compose.animation:animation-core", version.ref = "ui" }
-androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "ui" }
-androidx-ui-text = { module = "androidx.compose.ui:ui-text", version.ref = "ui" }
-androidx-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "ui" }
-androidx-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "ui" }
-androidx-material = { module = "androidx.compose.material:material", version.ref = "compose-material" }
-androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-material" }
-androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-material" }
+androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+androidx-ui-geometry = { module = "androidx.compose.ui:ui-geometry", version.ref = "compose" }
+androidx-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
+androidx-animation-core = { module = "androidx.compose.animation:animation-core", version.ref = "compose" }
+androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "compose" }
+androidx-ui-text = { module = "androidx.compose.ui:ui-text", version.ref = "compose" }
+androidx-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
+androidx-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "compose" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 
 #  androidTestImplementation
-androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "ui-test-junit4" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "test-junit" }
 
@@ -389,8 +406,8 @@ androidx-junit = { module = "androidx.test.ext:junit", version.ref = "test-junit
 junit = { module = "junit:junit", version.ref = "junit" }
 
 #  debugImplementation
-androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "ui-test-junit4" }
-androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "ui-test-junit4" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 
 #  ViewModel & LiveData
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
@@ -420,6 +437,10 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 #  HTTP
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+
+#  Chucker
+chucker-debug = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
+chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
 
 #  Navigation Component
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
@@ -455,11 +476,16 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android" }
 hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-compiler" }
 
+#  WorkManager
+work-manager = { module = "androidx.work:work-runtime-ktx", version.ref = "work-manager" }
 
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
+application = { id = "com.android.application", version.ref = "agp" }
+library = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 
 
