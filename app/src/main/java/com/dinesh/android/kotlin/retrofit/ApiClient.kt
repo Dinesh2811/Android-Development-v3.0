@@ -1,8 +1,13 @@
 package com.dinesh.android.kotlin.retrofit
 
+import android.content.Context
 import android.util.Log
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.dinesh.android.BuildConfig
 import com.google.gson.GsonBuilder
+import dagger.Provides
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -18,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
@@ -84,6 +90,7 @@ object ApiClient {
 //        .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
 //        .hostnameVerifier { _, _ -> true }
         .addInterceptor(ApiRetryInterceptor(RETRY_COUNT))
+//        .addInterceptor(chuckerInterceptor)
         .build()
 
     private fun createRetrofit(baseUrl: String): Retrofit {
@@ -100,6 +107,13 @@ object ApiClient {
 //            .setPrettyPrinting()
             .create()
     )
+
+//    @Singleton
+//    @Provides
+//    fun providesChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor {
+//        val chuckerCollector = ChuckerCollector(context = context, showNotification = true)
+//        return ChuckerInterceptor.Builder(context).collector(chuckerCollector).createShortcut(true).build()
+//    }
 
 //    fun getApiInterface(baseUrl: String = "http://10.0.2.2/"): ApiInterface {
 //        return createRetrofit(baseUrl).create(ApiInterface::class.java)

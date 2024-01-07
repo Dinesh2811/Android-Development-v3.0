@@ -216,7 +216,7 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
     // Animation
-    implementation("com.airbnb.android:lottie:6.2.0")   // Lottie
+    implementation("com.airbnb.android:lottie:6.3.0")   // Lottie
     implementation("com.facebook.shimmer:shimmer:0.5.0")    //  Shimmer
 
     // Location Services

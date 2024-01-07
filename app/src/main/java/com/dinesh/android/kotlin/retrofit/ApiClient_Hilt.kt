@@ -1,11 +1,15 @@
 package com.dinesh.android.kotlin.retrofit
 
+import android.content.Context
 import android.util.Log
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.dinesh.android.BuildConfig
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -61,7 +65,7 @@ object ApiClient_Hilt {
 
     @Singleton
     @Provides
-    fun providesOkHttpClient(): OkHttpClient {
+    fun providesOkHttpClient(chuckerInterceptor : ChuckerInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -73,6 +77,7 @@ object ApiClient_Hilt {
 //            .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
 //            .hostnameVerifier { _, _ -> true }
             .addInterceptor(ApiRetryInterceptor(RETRY_COUNT))
+            .addInterceptor(chuckerInterceptor)
             .build()
     }
 
@@ -85,6 +90,13 @@ object ApiClient_Hilt {
 //                .setPrettyPrinting()
                 .create()
         )
+    }
+
+    @Singleton
+    @Provides
+    fun providesChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor {
+        val chuckerCollector = ChuckerCollector(context = context, showNotification = true)
+        return ChuckerInterceptor.Builder(context).collector(chuckerCollector).createShortcut(true).build()
     }
 
     private val customLoggingInterceptor = Interceptor { chain ->
@@ -234,6 +246,7 @@ object ApiClient_FullHilt {
     fun providesOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
         customLoggingInterceptor: Interceptor,
+        chuckerInterceptor : ChuckerInterceptor,
         sslContext: SSLContext,
         trustAllCerts: Array<TrustManager>
     ): OkHttpClient {
@@ -248,6 +261,7 @@ object ApiClient_FullHilt {
 //            .sslSocketFactory(sslContext.socketFactory, trustAllCerts[0] as X509TrustManager)
 //            .hostnameVerifier { _, _ -> true }
 //            .addInterceptor(ApiRetryInterceptor(RETRY_COUNT))
+            .addInterceptor(chuckerInterceptor)
             .build()
     }
 
@@ -260,6 +274,13 @@ object ApiClient_FullHilt {
                 .setPrettyPrinting()
                 .create()
         )
+    }
+
+    @Singleton
+    @Provides
+    fun providesChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor {
+        val chuckerCollector = ChuckerCollector(context = context, showNotification = true)
+        return ChuckerInterceptor.Builder(context).collector(chuckerCollector).createShortcut(true).build()
     }
 
     @Singleton

@@ -25,13 +25,17 @@ class SharedPreferenceDelegate(context: Context, private val name: String, priva
 
 fun Context.sharedPreferences(name: String) = SharedPreferenceDelegate(this, name)
 
+object Constants {
+    var TOKEN: String? = null
+}
+
 class SharedPreferenceActivity : AppCompatActivity() {
     private var theme by sharedPreferences("Theme")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        theme = "Theme.Material3.Dark"
+//        theme = "Theme.Material3.Dark"
         Log.i(TAG, "onCreate: $theme")
 
 //        usualMethod()

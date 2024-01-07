@@ -49,3 +49,38 @@
 # Retain generic signatures of TypeToken and its subclasses with R8 version 3.0 and higher.
 -keep,allowobfuscation,allowshrinking class com.google.gson.reflect.TypeToken
 -keep,allowobfuscation,allowshrinking class * extends com.google.gson.reflect.TypeToken
+
+# Keep generic signature of Call, Response (R8 full mode strips signatures from non-kept items).
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
+
+
+
+
+
+
+## Add this line to keep all the classes in your project
+#-keep class com.dinesh.android.** { *; }
+#
+## Add these lines for Dagger-Hilt
+#-keep class dagger.hilt.android.** { *; }
+#-keep class dagger.** { *; }
+#-keep class javax.inject.** { *; }
+#-keep class dagger.hilt.internal.** { *; }
+#-keep class androidx.hilt.** { *; }
+#-keep class androidx.hilt.lifecycle.** { *; }
+#-keep class androidx.hilt.navigation.** { *; }
+#-keep class androidx.lifecycle.ViewModel { *; }
+#-keep class androidx.lifecycle.ViewModelProvider { *; }
+#
+## Add this line to keep all the classes that extend ViewModel
+#-keep class * extends androidx.lifecycle.ViewModel
+#
+## Add this line to keep all the classes that are annotated with @AndroidEntryPoint, @HiltAndroidApp, @HiltAndroidTest, @InstallIn
+#-keep @dagger.hilt.android.AndroidEntryPoint class *
+#-keep @dagger.hilt.android.HiltAndroidApp class *
+#-keep @dagger.hilt.android.ViewModelLifecycle class *
+

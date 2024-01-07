@@ -34,8 +34,8 @@ public class BasicMainActivity extends AppCompatActivity {
         String[] spinnerItem = {"Spinner 1", "Spinner 2", "Spinner 3", "Spinner 4", "Spinner 5",
                 "Spinner 6", "Spinner 7", "Spinner 8", "Spinner 9", "Spinner 10"};
 
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerItem);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.basic_spinner_custom_drop_down, spinnerItem);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerItem);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.basic_spinner_custom_drop_down, spinnerItem);
         autoCompleteTextView.setAdapter(arrayAdapter);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
